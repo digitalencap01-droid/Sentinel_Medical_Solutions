@@ -1,8 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import logoImage from '../../assets/images/logo.png'
 import { navLinks, primaryNavLinks } from './content'
-import { easeOut, LogoMark, ThemeToggle } from './shared'
+import { easeOut, ThemeToggle } from './shared'
 import type { Theme } from './types'
 
 type HeaderProps = {
@@ -33,16 +34,8 @@ export function Header({
       }`}
     >
       <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
-        <a href="#top" className="flex min-w-0 shrink items-center gap-2.5 sm:shrink-0">
-          <LogoMark />
-          <div className="min-w-0">
-            <div className="text-base font-extrabold tracking-[0.08em] text-[var(--accent)] sm:text-lg sm:tracking-[0.14em]">
-              SENTINEL
-            </div>
-            <div className="hidden text-[10px] uppercase tracking-[0.32em] text-[var(--muted)] sm:block">
-              Medical Solutions
-            </div>
-          </div>
+        <a href="#top" className="flex shrink-0 items-center">
+          <img src={logoImage} alt="Sentinel Medical Solutions" className="h-14 w-auto object-contain" />
         </a>
 
         <nav className="hidden items-center gap-0.5 rounded-full xl:flex">

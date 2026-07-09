@@ -191,7 +191,10 @@ export function PlaceholderRibbon({ className = '' }: { className?: string }) {
 
 export function LogoMark() {
   return (
-    <div className="relative flex size-9 items-center justify-center overflow-hidden rounded-xl border border-[var(--logo-border)] bg-[var(--logo-bg)] shadow-[0_10px_28px_rgba(79, 168, 201,0.18)]">
+    <div
+      className="relative flex size-9 items-center justify-center overflow-hidden rounded-xl border border-[var(--logo-border)] shadow-[0_10px_28px_rgba(79, 168, 201,0.18)]"
+      style={{ backgroundImage: 'var(--logo-bg)' }}
+    >
       <div className="absolute inset-[4px] rounded-lg border border-white/20" />
       <div className="absolute h-5.5 w-5.5 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.95),rgba(255,255,255,0.12)_70%)] opacity-70" />
       <div className="absolute h-6.5 w-px rotate-45 bg-white/60" />
