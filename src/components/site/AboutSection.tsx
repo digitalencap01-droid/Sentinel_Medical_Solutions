@@ -163,9 +163,9 @@ export function AboutSection() {
                         </span>
                       </div>
 
-                      <div className="grid transition-[grid-template-rows,opacity,margin] duration-500 ease-out [grid-template-rows:0fr] group-hover:mt-4 group-hover:[grid-template-rows:1fr]">
+                      <div className="mt-4 grid transition-[grid-template-rows,opacity,margin] duration-500 ease-out lg:mt-0 lg:[grid-template-rows:0fr] lg:group-hover:mt-4 lg:group-hover:[grid-template-rows:1fr]">
                         <div className="overflow-hidden">
-                          <p className="translate-y-2 text-[0.98rem] leading-8 text-[var(--text-soft)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 dark:text-white/82">
+                          <p className="text-[0.98rem] leading-8 text-[var(--text-soft)] transition-all duration-500 lg:translate-y-2 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 dark:text-white/82">
                             {card.body}
                           </p>
                         </div>

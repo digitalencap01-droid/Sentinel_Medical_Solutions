@@ -90,12 +90,12 @@ export function Header({
             className="border-b border-[var(--header-border)] bg-[var(--menu-bg)] backdrop-blur-xl xl:hidden"
           >
             <div className="mx-auto flex min-h-[calc(100vh-81px)] max-w-6xl flex-col px-6 py-10">
-              <div className="flex flex-1 flex-col gap-6">
+              <div className="flex flex-1 flex-col divide-y divide-[var(--divider)]">
                 {navLinks.map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
-                    className="text-2xl font-medium tracking-[-0.03em] text-[var(--text-strong)]"
+                    className="py-3.5 text-base font-normal tracking-[-0.01em] text-[var(--text)] transition-colors duration-200 hover:text-[var(--accent)]"
                     onClick={onMenuClose}
                   >
                     {link.label}
