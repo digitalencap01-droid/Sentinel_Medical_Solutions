@@ -1,0 +1,43 @@
+{
+  "header": {
+    "cta": "Partner with Us",
+    "themeToggleToLight": "Switch to light theme",
+    "themeToggleToDark": "Switch to dark theme",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "eyebrow": "Global Healthcare Distribution & Supply Chain",
+    "body": "Built on UAE and India operating strength, Sentinel distributes pharmaceuticals, consumables, devices and clinical solutions across the UAE, the Middle East and key African markets.",
+    "ctaPrimary": "Start a Partnership",
+    "ctaSecondary": "View Capabilities"
+  },
+  "sections": {
+    "about": {
+      "eyebrow": "Who We Are",
+      "title": "A Focused Healthcare Platform Built for Reliable Market Access.",
+      "body": "Sentinel Medical Solutions connects global and regional manufacturers with hospitals, clinics, pharmacies and institutional buyers through structured sourcing, warehousing, logistics coordination and partner-facing governance."
+    }
+  },
+  "footer": {
+    "tagline": "Disciplined healthcare distribution. UAE, Middle East and Africa.",
+    "companyHeading": "Company",
+    "platformHeading": "Platform",
+    "contactHeading": "Get in Touch",
+    "ctaPartnership": "Start a Partnership",
+    "backToTop": "Back to top",
+    "copyright": "© {{year}} Sentinel Medical Solutions. All rights reserved."
+  },
+  "contactForm": {
+    "fullName": "Full name",
+    "organisation": "Organisation",
+    "email": "Email",
+    "enquiryType": "Enquiry type",
+    "selectOne": "Select one",
+    "message": "Message",
+    "send": "Send Enquiry",
+    "sending": "Sending…",
+    "thanksTitle": "Thanks for reaching out.",
+    "thanksBody": "Your enquiry has been recorded. Our team will follow up shortly."
+  }
+}

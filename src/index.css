@@ -1,0 +1,279 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Redesign token system (guardianship / cargo-manifest direction).
+  Core palette is primitive — everything else below derives from it. Ink is the
+  dark-mode base, Paper is the light-mode base; they are not simple inverses of each
+  other, each was checked for contrast independently (re-verify with axe-core if any
+  of these change).
+*/
+:root {
+  /* Core palette */
+  --color-ink: #0e1b2a;
+  --color-paper: #f5f6f4;
+  --color-steel: #8b97a6;
+  --color-steel-light: #c7ced6;
+  --color-signal: #4fa8c9;
+  --color-signal-strong: #1f6e8c; /* verified 5.7:1 on Paper/white at small text sizes (axe-core) — use this, not --color-signal, for small text/links on light backgrounds */
+  --color-signal-soft: #a9d3e2;
+  --color-signal-bright: #8fd3e8; /* signal tuned for use on dark/Ink backgrounds */
+  --color-guardian: #6b5ca5; /* reserved: Ethos card, Advisory Board only */
+  --color-accent-rare: #c13f7a; /* reserved: placeholder ribbon only */
+
+  /* Type — single minimalist family (Geist) throughout, per direct user preference —
+     no separate display/mono typefaces. font-mono utility usages across components
+     still apply (uppercase + letter-spacing carries the "label" look), they just
+     render in Geist rather than a literal monospace now. */
+  --font-display: "Geist Variable", sans-serif;
+  --font-body: "Geist Variable", sans-serif;
+  --font-mono: "Geist Variable", sans-serif;
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-display);
+
+  /* Type scale — one ratio-based scale, referenced via text-[length:var(--text-*)] */
+  --text-xs: 0.8125rem; /* 13px */
+  --text-sm: 1rem; /* 16px */
+  --text-md: 1.25rem; /* 20px */
+  --text-lg: 1.75rem; /* 28px */
+  --text-xl: 2.5rem; /* 40px */
+  --text-2xl: 4rem; /* 64px */
+
+  --space-section-y: clamp(5rem, 10vw, 9rem);
+  --radius: 1rem;
+
+  /* Semantic tokens — light mode ("Paper") */
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+  --muted-foreground: var(--color-steel);
+  --border: var(--color-steel-light);
+  --input: var(--color-steel-light);
+  --ring: var(--color-signal-strong);
+
+  --page-bg: var(--color-paper);
+  --surface: #ffffff;
+  --surface-alt: var(--color-paper);
+  --text: #1e2b3a;
+  --text-strong: var(--color-ink);
+  --text-soft: #4b5a6b;
+  --muted: #6b7785;
+  --divider: #dfe3e7;
+  --accent: var(--color-signal-strong);
+  --accent-strong: #17586e;
+  --accent-soft: var(--color-signal-soft);
+  --accent-wash: #eaf4f7;
+  --chip-bg: #eef0ef;
+  --chip-text: #455468;
+  --card-bg: #ffffff;
+  --card-border: var(--color-steel-light);
+
+  --hero-bg: var(--color-ink);
+  --dark-surface: var(--color-ink);
+  --dark-text: var(--color-paper);
+  --dark-muted: #9eafc7;
+  --dark-accent: var(--color-signal-bright);
+  --dark-accent-soft: rgba(143, 211, 232, 0.42);
+  --dark-card-bg: rgba(255, 255, 255, 0.05);
+  --dark-card-border: rgba(255, 255, 255, 0.12);
+  --hero-chip-bg: rgba(14, 27, 42, 0.72);
+  --hero-chip-border: rgba(79, 168, 201, 0.35);
+
+  --header-surface: rgba(245, 246, 244, 0.8);
+  --header-border: rgba(199, 206, 214, 0.86);
+  --menu-bg: rgba(245, 246, 244, 0.96);
+  --toggle-track: rgba(79, 168, 201, 0.18);
+  --logo-bg: linear-gradient(135deg, #14293d 0%, #4fa8c9 100%);
+  --logo-border: rgba(255, 255, 255, 0.18);
+
+  --emphasis-surface: linear-gradient(180deg, #f3f6f5 0%, #eaf1f0 100%);
+  --emphasis-text: #102033;
+  --emphasis-muted: #5b6b83;
+  --emphasis-accent: var(--color-signal-strong);
+  --emphasis-accent-soft: rgba(79, 168, 201, 0.24);
+  --emphasis-card-bg: rgba(255, 255, 255, 0.7);
+  --emphasis-card-border: rgba(199, 206, 214, 0.8);
+  --emphasis-button-bg: var(--color-ink);
+  --emphasis-button-text: #ffffff;
+  --emphasis-outline-border: rgba(79, 168, 201, 0.24);
+  --emphasis-outline-hover: rgba(255, 255, 255, 0.55);
+
+  --footer-bg: #ececeb;
+  --footer-text: var(--color-ink);
+  --footer-muted: #5c6773;
+  --footer-accent: var(--color-signal-strong);
+  --footer-border: rgba(14, 27, 42, 0.1);
+  --footer-copy: #738198;
+
+  /* Guardianship + rare-alert tokens (used sparingly, see index.css comment + brief §5) */
+  --guardian: var(--color-guardian);
+  --guardian-wash: rgba(107, 92, 165, 0.1);
+  --guardian-soft: rgba(107, 92, 165, 0.3);
+  --accent-rare: var(--color-accent-rare);
+}
+
+.dark {
+  --background: var(--color-ink);
+  --foreground: var(--color-paper);
+  --muted-foreground: #93a4bc;
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: var(--color-signal-bright);
+
+  --page-bg: var(--color-ink);
+  --surface: #0f1c2c;
+  --surface-alt: #0b1622;
+  --text: #dce8f7;
+  --text-strong: var(--color-paper);
+  --text-soft: #b2bfd3;
+  --muted: #93a4bc;
+  --divider: rgba(255, 255, 255, 0.09);
+  --accent: var(--color-signal-bright);
+  --accent-strong: #a9e0f0;
+  --accent-soft: rgba(143, 211, 232, 0.5);
+  --accent-wash: rgba(143, 211, 232, 0.12);
+  --chip-bg: rgba(255, 255, 255, 0.07);
+  --chip-text: #d5def0;
+  --card-bg: rgba(20, 32, 50, 0.82);
+  --card-border: rgba(255, 255, 255, 0.12);
+
+  --hero-bg: #081420;
+  --dark-surface: #081420;
+  --dark-text: var(--color-paper);
+  --dark-muted: #9eafc7;
+  --dark-accent: var(--color-signal-bright);
+  --dark-accent-soft: rgba(143, 211, 232, 0.42);
+  --dark-card-bg: rgba(255, 255, 255, 0.05);
+  --dark-card-border: rgba(255, 255, 255, 0.1);
+  --hero-chip-bg: rgba(255, 255, 255, 0.06);
+  --hero-chip-border: rgba(143, 211, 232, 0.24);
+
+  --header-surface: rgba(8, 20, 32, 0.78);
+  --header-border: rgba(255, 255, 255, 0.08);
+  --menu-bg: rgba(8, 20, 32, 0.96);
+  --toggle-track: rgba(143, 211, 232, 0.24);
+  --logo-bg: linear-gradient(135deg, #123049 0%, #6fc4e3 100%);
+  --logo-border: rgba(255, 255, 255, 0.16);
+
+  --emphasis-surface: var(--color-ink);
+  --emphasis-text: var(--color-paper);
+  --emphasis-muted: #9eafc7;
+  --emphasis-accent: var(--color-signal-bright);
+  --emphasis-accent-soft: rgba(143, 211, 232, 0.42);
+  --emphasis-card-bg: rgba(255, 255, 255, 0.05);
+  --emphasis-card-border: rgba(255, 255, 255, 0.1);
+  --emphasis-button-bg: #ffffff;
+  --emphasis-button-text: var(--color-ink);
+  --emphasis-outline-border: rgba(255, 255, 255, 0.2);
+  --emphasis-outline-hover: rgba(255, 255, 255, 0.05);
+
+  --footer-bg: #081420;
+  --footer-text: var(--color-paper);
+  --footer-muted: #9eafc7;
+  --footer-accent: var(--color-signal-bright);
+  --footer-border: rgba(255, 255, 255, 0.1);
+  --footer-copy: #7d8aa0;
+
+  --guardian: #9a8ccf;
+  --guardian-wash: rgba(154, 140, 207, 0.14);
+  --guardian-soft: rgba(154, 140, 207, 0.36);
+  --accent-rare: #e0699a;
+}
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth;
+    font-family: var(--font-body);
+    scroll-padding-top: 96px;
+  }
+
+  body {
+    @apply m-0 overflow-x-hidden bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+    background: var(--page-bg);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease,
+      background 0.3s ease;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: rgba(79, 168, 201, 0.22);
+    color: var(--text-strong);
+  }
+}
+
+@keyframes hero-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes route-dash {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+@keyframes proof-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
