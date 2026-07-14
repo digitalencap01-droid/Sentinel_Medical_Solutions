@@ -3,6 +3,8 @@ import { clients } from './content'
 import { lightSection, SectionIntro } from './shared'
 
 export function ClientsSection() {
+  const hasRealLogo = (logoUrl: string) => !logoUrl.startsWith('/placeholders/')
+
   return (
     <section id="clients" className={`${lightSection} py-24`}>
       <div className="mx-auto max-w-6xl px-6">
@@ -25,13 +27,37 @@ export function ClientsSection() {
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } }}
               className="flex h-28 flex-col items-center justify-center gap-2 rounded-[1.5rem] border border-[var(--card-border)] bg-[var(--card-bg)] px-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-soft)] hover:shadow-[0_12px_28px_rgba(79,168,201,0.1)]"
             >
-              {/* TODO: replace with real client logo assets at client.logoUrl once supplied. */}
-              <span className="text-base font-semibold tracking-[-0.02em] text-[var(--text-strong)]">
-                {client.name}
-              </span>
-              <span className="font-mono text-[0.6rem] font-medium uppercase tracking-[0.16em] text-[var(--text-soft)] opacity-60">
-                Logo pending
-              </span>
+              {hasRealLogo(client.logoUrl) ? (
+                <>
+                  <div
+                    className={`flex h-14 w-full items-center justify-center ${
+                      client.name === 'Imbono' || client.name === 'Sirius Holding'
+                        ? 'rounded-2xl bg-slate-900 px-4 py-3'
+                        : ''
+                    }`}
+                  >
+                    <img
+                      src={client.logoUrl}
+                      alt={`${client.name} logo`}
+                      className="max-h-full w-auto max-w-full object-contain"
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <span className="text-sm font-semibold tracking-[-0.02em] text-[var(--text-strong)]">
+                    {client.name}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="text-base font-semibold tracking-[-0.02em] text-[var(--text-strong)]">
+                    {client.name}
+                  </span>
+                  <span className="font-mono text-[0.6rem] font-medium uppercase tracking-[0.16em] text-[var(--text-soft)] opacity-60">
+                    Logo pending
+                  </span>
+                </>
+              )}
             </motion.div>
           ))}
         </motion.div>

@@ -469,10 +469,10 @@ export const advisoryBoard: AdvisoryBoardMember[] = [
 // real logo assets. relationshipDescriptor is intentionally left unset: relationship
 // language must be approved by each client before it's published (see brief 1.2).
 export const clients: Client[] = [
-  { name: 'IHC', logoUrl: '/placeholders/client-ihc.svg' },
-  { name: 'Sirius Holding', logoUrl: '/placeholders/client-sirius-holding.svg' },
-  { name: 'Gemcorp', logoUrl: '/placeholders/client-gemcorp.svg' },
-  { name: 'Imbono', logoUrl: '/placeholders/client-imbono.svg' },
+  { name: 'IHC', logoUrl: 'https://indiahabitat.org//assets/user/img/logo.png' },
+  { name: 'Sirius Holding', logoUrl: '/client-sirius-holding.svg' },
+  { name: 'Gemcorp', logoUrl: 'https://gemcorprecycling.com/wp-content/uploads/2025/04/Gemcorp-Logo-Final-RGB.png' },
+  { name: 'Imbono', logoUrl: 'https://cdn.yano.digital/media/wk3hip2f/endorsed-imbono-logo-white-1.svg' },
 ]
 
 // ## Contact ----------------------------------------------------------------------------

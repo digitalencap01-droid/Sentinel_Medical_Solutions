@@ -27,7 +27,7 @@ export function ProofStripSection() {
                   <div
                     key={`${stat.label}-${index}`}
                     aria-hidden={index >= tiles.length}
-                    className="group relative flex h-[188px] w-[224px] shrink-0 flex-col justify-center gap-3.5 overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[var(--accent-soft)] hover:shadow-[0_22px_44px_rgba(79,168,201,0.16)]"
+                    className="group relative flex min-h-[212px] w-[224px] shrink-0 flex-col justify-start gap-3.5 overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[var(--accent-soft)] hover:shadow-[0_22px_44px_rgba(79,168,201,0.16)]"
                   >
                     <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 [background:radial-gradient(140px_100px_at_15%_-10%,rgba(79,168,201,0.14),transparent)]" />
                     <div className="relative flex size-10 items-center justify-center rounded-xl bg-[var(--accent-wash)] transition-colors duration-300 group-hover:bg-[var(--accent)] dark:bg-white/6">
@@ -36,14 +36,14 @@ export function ProofStripSection() {
                         aria-hidden="true"
                       />
                     </div>
-                    <div className="relative font-mono text-[1.9rem] font-semibold leading-none tracking-[-0.02em] text-[var(--accent)]">
+                    <div className="relative font-mono text-[1.75rem] font-semibold leading-tight tracking-[-0.02em] text-[var(--accent)]">
                       {stat.staticValue ? (
                         stat.staticValue
                       ) : (
                         <CountUp value={stat.value ?? 0} suffix={stat.suffix} prefix={stat.prefix} />
                       )}
                     </div>
-                    <p className="relative line-clamp-3 text-[0.8rem] leading-5 text-[var(--muted)]">
+                    <p className="relative text-[0.8rem] leading-5 text-[var(--muted)]">
                       {stat.label}
                     </p>
                   </div>
