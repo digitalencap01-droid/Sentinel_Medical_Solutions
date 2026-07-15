@@ -1,10 +1,8 @@
 import { AboutSection } from './AboutSection'
-import { AdvisoryBoardSection } from './AdvisoryBoardSection'
 import { CapabilitiesSection } from './CapabilitiesSection'
 import { ClientsSection } from './ClientsSection'
 import { ContactSection } from './ContactSection'
 import { GlobalReachSection } from './GlobalReachSection'
-import { LeadershipSection } from './LeadershipSection'
 import { OperationsSection } from './OperationsSection'
 import { PartnershipsSection } from './PartnershipsSection'
 import { ProofStripSection } from './ProofStripSection'
@@ -25,10 +23,8 @@ export function SiteSections() {
       <OperationsSection />
       <PartnershipsSection />
       <SupplyRangeSection />
-      <LeadershipSection />
-      <AdvisoryBoardSection />
-      <ClientsSection />
       <WhySentinelSection />
+      <ClientsSection />
       <ContactSection />
     </>
   )

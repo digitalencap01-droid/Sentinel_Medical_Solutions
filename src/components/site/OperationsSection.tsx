@@ -14,6 +14,14 @@ const operatingStepTags = [
   'Service follow-through',
 ]
 const operationsPanelEyebrows = ['Commercial + Supply', 'Field + Service']
+const operatingStepBackgrounds = [
+  'https://images.unsplash.com/photo-1470058869958-2a77ade41c02?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGxhbnRzfGVufDB8fDB8fHww',
+  'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGxhbnxlbnwwfHwwfHx8MA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1683141052679-942eb9e77760?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3RvcmV8ZW58MHx8MHx8fDA%3D',
+  'https://images.unsplash.com/photo-1594643779073-f18d03c18a3e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGZ1bGZpbHxlbnwwfHwwfHx8MA%3D%3D',
+  'https://images.unsplash.com/photo-1543499459-d1460946bdc6?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VwcG9ydHxlbnwwfHwwfHx8MA%3D%3D',
+]
 
 export function OperationsSection() {
   return (
@@ -71,9 +79,27 @@ export function OperationsSection() {
                   to={getDetailPath(operatingStepDetailIds[index])}
                   className="relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-5 transition-all duration-300 group-hover:border-[var(--accent-soft)] group-hover:shadow-[0_16px_40px_rgba(79,168,201,0.12)]"
                 >
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 opacity-[0.36] transition-opacity duration-500 group-hover:opacity-[0.5]"
+                    style={{
+                      backgroundImage: `url(${operatingStepBackgrounds[index]})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                    }}
+                  />
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0.56)_36%,rgba(255,255,255,0.4)_100%)] dark:bg-[linear-gradient(180deg,rgba(15,28,44,0.82)_0%,rgba(15,28,44,0.64)_38%,rgba(15,28,44,0.48)_100%)]"
+                  />
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(79,168,201,0.14),transparent_36%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(79,168,201,0.08),transparent_34%)]"
+                  />
                   <div className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 rounded-full bg-gradient-to-r from-[#4FA8C9] via-[#7CC4DD] to-transparent transition-transform duration-500 ease-out group-hover:scale-x-100" />
 
-                  <div className="relative flex flex-col items-center gap-2">
+                  <div className="relative flex flex-col items-center gap-2 rounded-[1.2rem] bg-white/28 px-3 py-3 backdrop-blur-[2px] dark:bg-white/6">
                     <div className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] font-mono text-[0.85rem] font-medium text-white shadow-[0_8px_18px_rgba(79,168,201,0.28)] transition-transform duration-300 group-hover:scale-110">
                       {index + 1}
                     </div>
@@ -82,13 +108,13 @@ export function OperationsSection() {
                     </span>
                   </div>
 
-                  <h3 className="relative mt-4 text-center text-[1.05rem] font-semibold leading-tight tracking-[-0.03em] text-[var(--text-strong)]">
+                  <h3 className="relative mt-4 rounded-xl bg-white/34 px-3 py-2 text-center text-[1.05rem] font-semibold leading-tight tracking-[-0.03em] text-[var(--text-strong)] backdrop-blur-[2px] dark:bg-white/6">
                     {step.title}
                   </h3>
-                  <p className="relative mt-2.5 flex-1 text-center text-[0.8rem] leading-6 text-[var(--muted)]">
+                  <p className="relative mt-2.5 flex-1 rounded-[1rem] bg-white/26 px-3 py-3 text-center text-[0.8rem] leading-6 text-[var(--text-soft)] backdrop-blur-[2px] dark:bg-white/4 dark:text-[var(--dark-muted)]">
                     {step.body}
                   </p>
-                  <div className="relative mt-5 flex items-center justify-between border-t border-[var(--divider)] pt-4 font-mono text-[0.6rem] font-medium uppercase tracking-[0.18em] text-[var(--muted)]">
+                  <div className="relative mt-5 flex items-center justify-between rounded-[1rem] border border-white/30 bg-white/24 px-3 py-3 font-mono text-[0.6rem] font-medium uppercase tracking-[0.18em] text-[var(--text-soft)] backdrop-blur-[2px] dark:border-white/10 dark:bg-white/4 dark:text-[var(--dark-muted)]">
                     <span>Step {String(index + 1).padStart(2, '0')}</span>
                     <span className="inline-flex size-7 items-center justify-center rounded-full bg-[var(--accent-wash)] text-[var(--accent)] transition-all duration-300 group-hover:translate-x-0.5 group-hover:bg-[var(--accent)] group-hover:text-white">
                       <ChevronRight className="size-3.5" />
