@@ -11,7 +11,9 @@ import {
   Wind,
 } from 'lucide-react'
 import { useId, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { consumableCards, deviceCards, pharmaPortfolio } from './content'
+import { consumableDetailIds, deviceDetailIds, getDetailPath, medicineDetailIds, pharmaCategoryDetailIds } from './detailContent'
 import { cardVariant, easeOut, lightSection, Reveal, SectionIntro, staggerContainer } from './shared'
 
 type TabKey = 'pharma' | 'consumables' | 'devices'
@@ -229,9 +231,11 @@ function PharmaPanel() {
                     <div className="inline-flex items-center justify-center rounded-xl bg-[var(--accent-wash)] p-2 text-[var(--accent)] transition-transform duration-300 group-hover:scale-110">
                       <Icon className="size-4" />
                     </div>
-                    <h3 className="mt-2.5 text-base font-semibold leading-snug tracking-[-0.01em] text-[var(--text-strong)]">
-                      {group.title}
-                    </h3>
+                    <Link to={getDetailPath(pharmaCategoryDetailIds[index])} className="block">
+                      <h3 className="mt-2.5 text-base font-semibold leading-snug tracking-[-0.01em] text-[var(--text-strong)]">
+                        {group.title}
+                      </h3>
+                    </Link>
                     <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-[var(--divider)] bg-[var(--surface-alt)] px-2.5 py-1 text-[0.68rem] font-medium uppercase tracking-[0.08em] text-[var(--text-soft)]">
                       <span className="text-[var(--accent)]">{group.medicines.length}</span>
                       Products
@@ -240,14 +244,20 @@ function PharmaPanel() {
                 </div>
 
                 <div className="flex flex-1 flex-wrap items-start gap-2 lg:pt-1">
-                  {visibleMedicines.map((medicine) => (
-                    <span
-                      key={medicine}
-                      className="rounded-full border border-[var(--card-border)] bg-[var(--surface-alt)] px-3.5 py-1.5 text-xs font-medium text-[var(--text-soft)] transition-all duration-300 group-hover:border-[var(--accent-soft)] group-hover:bg-[var(--accent-wash)] group-hover:text-[var(--accent)]"
-                    >
-                      {medicine}
-                    </span>
-                  ))}
+                  {visibleMedicines.map((medicine, medicineIndex) => {
+                    const medicineFlatIndex =
+                      pharmaPortfolio.slice(0, index).reduce((sum, item) => sum + item.medicines.length, 0) +
+                      medicineIndex
+                    return (
+                      <Link
+                        key={medicine}
+                        to={getDetailPath(medicineDetailIds[medicineFlatIndex])}
+                        className="rounded-full border border-[var(--card-border)] bg-[var(--surface-alt)] px-3.5 py-1.5 text-xs font-medium text-[var(--text-soft)] transition-all duration-300 group-hover:border-[var(--accent-soft)] group-hover:bg-[var(--accent-wash)] group-hover:text-[var(--accent)]"
+                      >
+                        {medicine}
+                      </Link>
+                    )
+                  })}
                   {hasMore && (
                     <button
                       type="button"
@@ -388,6 +398,11 @@ function ConsumablesPanel() {
                     </span>
                   </div>
                 </div>
+                <Link
+                  to={getDetailPath(consumableDetailIds[index])}
+                  aria-label={`${card.title} details`}
+                  className="absolute inset-0 z-20 rounded-[1.75rem]"
+                />
               </motion.div>
             )
           })}
@@ -407,33 +422,38 @@ function ConsumablesPanel() {
             <motion.div
               key={card.title}
               variants={cardVariant}
-              className="group relative overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-soft)]"
+              className="group relative overflow-hidden rounded-[1.75rem] transition-all duration-300 hover:-translate-y-1"
             >
-              <img
-                src={consumableImages[index]}
-                alt=""
-                aria-hidden
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover opacity-[0.1] transition-opacity duration-500 group-hover:opacity-[0.2]"
-              />
-              <div className="absolute inset-0 bg-[color:color-mix(in_srgb,var(--card-bg)_86%,transparent)]" />
-              <div className="relative">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="inline-flex items-center justify-center rounded-2xl bg-[var(--accent-wash)] p-3 text-[var(--accent)]">
-                    <Icon className="size-5" />
+              <Link
+                to={getDetailPath(consumableDetailIds[index])}
+                className="relative block rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 hover:border-[var(--accent-soft)]"
+              >
+                <img
+                  src={consumableImages[index]}
+                  alt=""
+                  aria-hidden
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover opacity-[0.1] transition-opacity duration-500 group-hover:opacity-[0.2]"
+                />
+                <div className="absolute inset-0 bg-[color:color-mix(in_srgb,var(--card-bg)_86%,transparent)]" />
+                <div className="relative">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="inline-flex items-center justify-center rounded-2xl bg-[var(--accent-wash)] p-3 text-[var(--accent)]">
+                      <Icon className="size-5" />
+                    </div>
+                    <span className="select-none font-mono text-[1.85rem] font-medium leading-none text-[var(--accent)] opacity-[0.12]">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
                   </div>
-                  <span className="select-none font-mono text-[1.85rem] font-medium leading-none text-[var(--accent)] opacity-[0.12]">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
+                  <p className="mt-4 font-mono text-[10px] font-medium uppercase tracking-[0.3em] text-[var(--accent)]">
+                    Clinical Supply
+                  </p>
+                  <h3 className="mt-1 text-lg font-semibold leading-tight tracking-[-0.03em] text-[var(--text-strong)]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{card.body}</p>
                 </div>
-                <p className="mt-4 font-mono text-[10px] font-medium uppercase tracking-[0.3em] text-[var(--accent)]">
-                  Clinical Supply
-                </p>
-                <h3 className="mt-1 text-lg font-semibold leading-tight tracking-[-0.03em] text-[var(--text-strong)]">
-                  {card.title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{card.body}</p>
-              </div>
+              </Link>
             </motion.div>
           )
         })}
@@ -460,7 +480,7 @@ function DevicesPanel() {
           transition={{ duration: 0.24, ease: easeOut }}
           className="group h-full overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] transition-[border-color,box-shadow,transform] duration-300 hover:border-[var(--accent-soft)] hover:shadow-[0_16px_36px_rgba(79,168,201,0.1)]"
         >
-          <div className="flex h-full flex-col p-5 md:p-6">
+          <Link to={getDetailPath(deviceDetailIds[0])} className="flex h-full flex-col p-5 md:p-6">
             <div className="flex items-start justify-between gap-4">
               <div className="rounded-full border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-2 font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-[var(--accent)]">
                 Featured Capability
@@ -488,7 +508,7 @@ function DevicesPanel() {
                 Diagnostics-led
               </span>
             </div>
-          </div>
+          </Link>
         </motion.div>
 
         {deviceLeadCards.map(({ card, eyebrow }) => {
@@ -501,7 +521,10 @@ function DevicesPanel() {
               transition={{ duration: 0.24, ease: easeOut }}
               className="group h-full overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] transition-[border-color,box-shadow,transform] duration-300 hover:border-[var(--accent-soft)] hover:shadow-[0_16px_36px_rgba(79,168,201,0.1)]"
             >
-              <div className="flex h-full flex-col p-5 md:p-6">
+              <Link
+                to={getDetailPath(deviceDetailIds[deviceCards.findIndex((item) => item.title === card.title)])}
+                className="flex h-full flex-col p-5 md:p-6"
+              >
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-[var(--accent)]">
@@ -523,7 +546,7 @@ function DevicesPanel() {
                     {eyebrow}
                   </span>
                 </div>
-              </div>
+              </Link>
             </motion.div>
           )
         })}
@@ -560,7 +583,11 @@ function DevicesPanel() {
             {deviceSpecialties.map((card, index) => {
               const Icon = card.icon
               return (
-                <div key={card.title} className="bg-[var(--card-bg)] p-5">
+                <Link
+                  key={card.title}
+                  to={getDetailPath(deviceDetailIds[deviceCards.findIndex((item) => item.title === card.title)])}
+                  className="block bg-[var(--card-bg)] p-5"
+                >
                   <div className="flex items-start justify-between gap-3">
                     <div className="inline-flex size-10 items-center justify-center rounded-2xl bg-[var(--accent-wash)] text-[var(--accent)]">
                       <Icon className="size-4.5" />
@@ -576,7 +603,7 @@ function DevicesPanel() {
                   <p className="mt-4 border-t border-[var(--divider)] pt-3 text-[0.74rem] leading-5 text-[var(--text-soft)]">
                     {deviceSpecialtyInsights[index]}
                   </p>
-                </div>
+                </Link>
               )
             })}
           </div>
@@ -590,7 +617,7 @@ function DevicesPanel() {
         className="group overflow-hidden rounded-[1.85rem] border border-[var(--card-border)] bg-[var(--card-bg)] transition-[border-color,box-shadow,transform] duration-300 hover:border-[var(--accent-soft)]"
       >
         <div className="grid gap-px bg-[var(--divider)] lg:grid-cols-[minmax(0,1fr)_300px]">
-          <div className="bg-[var(--card-bg)] p-6 md:p-7">
+          <Link to={getDetailPath(deviceDetailIds[7])} className="block bg-[var(--card-bg)] p-6 md:p-7">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="font-mono text-[0.68rem] font-medium uppercase tracking-[0.28em] text-[var(--accent)]">
@@ -608,7 +635,7 @@ function DevicesPanel() {
               {infrastructureDevice.body} Built for programs where procurement, deployment and long-term service
               have to operate as one coordinated system.
             </p>
-          </div>
+          </Link>
 
           <div className="grid gap-px bg-[var(--divider)]">
             {infrastructureHighlights.map((item) => (

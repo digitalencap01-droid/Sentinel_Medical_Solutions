@@ -1,6 +1,8 @@
 import { Boxes, Building2, Globe, Handshake, MapPinned, Package, Users } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { credentials, topStats } from './content'
+import { getDetailPath, proofDetailIds } from './detailContent'
 import { CountUp, Reveal } from './shared'
 
 // Merged "Platform Scale" + "Credentials" strips into one proof strip (brief §4, row 2).
@@ -24,9 +26,10 @@ export function ProofStripSection() {
               {loopTiles.map((stat, index) => {
                 const Icon = tileIcons[index % tileIcons.length]
                 return (
-                  <div
+                  <Link
                     key={`${stat.label}-${index}`}
                     aria-hidden={index >= tiles.length}
+                    to={getDetailPath(proofDetailIds[index % tiles.length])}
                     className="group relative flex min-h-[212px] w-[224px] shrink-0 flex-col justify-start gap-3.5 overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[var(--accent-soft)] hover:shadow-[0_22px_44px_rgba(79,168,201,0.16)]"
                   >
                     <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 [background:radial-gradient(140px_100px_at_15%_-10%,rgba(79,168,201,0.14),transparent)]" />
@@ -46,7 +49,7 @@ export function ProofStripSection() {
                     <p className="relative text-[0.8rem] leading-5 text-[var(--muted)]">
                       {stat.label}
                     </p>
-                  </div>
+                  </Link>
                 )
               })}
             </div>

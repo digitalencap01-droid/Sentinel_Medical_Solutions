@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { whySentinelCards } from './content'
+import { getDetailPath, whyDetailIds } from './detailContent'
 import { cardVariant, easeOut, mutedSection, Reveal, staggerContainer } from './shared'
 
 export function WhySentinelSection() {
@@ -28,18 +30,23 @@ export function WhySentinelSection() {
             viewport={{ once: true, amount: 0.15 }}
             variants={staggerContainer}
           >
-            {whySentinelCards.map((card) => (
+            {whySentinelCards.map((card, index) => (
               <motion.div
                 key={card.title}
                 variants={cardVariant}
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.24, ease: easeOut }}
-                className="overflow-hidden rounded-[1.5rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 transition-[border-color,box-shadow] duration-300 hover:border-[var(--accent-soft)] hover:shadow-[0_12px_32px_rgba(79,168,201,0.1)]"
+                className="overflow-hidden rounded-[1.5rem] transition-[border-color,box-shadow] duration-300 hover:shadow-[0_12px_32px_rgba(79,168,201,0.1)]"
               >
-                <h3 className="whitespace-nowrap text-lg font-semibold tracking-[-0.01em] text-[var(--accent)]">
-                  {card.title}
-                </h3>
-                <p className="mt-3 break-words text-[0.92rem] leading-7 text-[var(--muted)]">{card.body}</p>
+                <Link
+                  to={getDetailPath(whyDetailIds[index])}
+                  className="block rounded-[1.5rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 hover:border-[var(--accent-soft)]"
+                >
+                  <h3 className="whitespace-nowrap text-lg font-semibold tracking-[-0.01em] text-[var(--accent)]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-3 break-words text-[0.92rem] leading-7 text-[var(--muted)]">{card.body}</p>
+                </Link>
               </motion.div>
             ))}
           </motion.div>

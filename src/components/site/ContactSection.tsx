@@ -3,8 +3,10 @@ import { motion } from 'framer-motion'
 import { CheckCircle2, ChevronRight, Mail, MapPinned } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 import { z } from 'zod'
 import { enquiryTypes, regionalOffices } from './content'
+import { getDetailPath, officeDetailIds } from './detailContent'
 import { trackEvent } from '../../lib/analytics'
 import { emphasisSection, Reveal, SectionIntro } from './shared'
 
@@ -146,8 +148,12 @@ export function ContactSection() {
                   Regional Offices
                 </p>
                 <div className="mt-5 grid gap-4">
-                  {regionalOffices.map((office) => (
-                    <div key={office.region} className="border-b border-[var(--emphasis-card-border)] pb-4 last:border-b-0 last:pb-0">
+                  {regionalOffices.map((office, index) => (
+                    <Link
+                      key={office.region}
+                      to={getDetailPath(officeDetailIds[index])}
+                      className="block border-b border-[var(--emphasis-card-border)] pb-4 last:border-b-0 last:pb-0"
+                    >
                       <div className="flex items-center gap-2">
                         <MapPinned className="size-3.5 text-[var(--emphasis-accent)]" aria-hidden="true" />
                         <span className="text-sm font-semibold text-[var(--emphasis-text)]">{office.region}</span>
@@ -158,7 +164,7 @@ export function ContactSection() {
                         )}
                       </div>
                       <p className="mt-1.5 text-sm leading-6 text-[var(--emphasis-muted)]">{office.addressLine}</p>
-                    </div>
+                    </Link>
                   ))}
                 </div>
                 <p className="mt-2 text-[0.68rem] leading-5 text-[var(--emphasis-muted)] opacity-70">

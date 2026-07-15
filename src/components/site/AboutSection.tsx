@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion'
 import { ChevronRight, Eye, ShieldCheck, Target } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 import { profileCards } from './content'
+import { aboutDetailIds, getDetailPath } from './detailContent'
 import { easeOut, lightSection, SectionIntro, staggerContainer } from './shared'
 
 const profileIcons = [Eye, Target, ShieldCheck]
@@ -63,9 +65,12 @@ export function AboutSection() {
                 variants={profileCardVariants}
                 whileHover={{ y: -10 }}
                 transition={{ duration: 0.28 }}
-                className="group overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] transition-shadow duration-300 hover:shadow-[0_16px_40px_rgba(14,27,42,0.1)] dark:hover:shadow-[0_16px_40px_rgba(0,0,0,0.34)]"
+                className="group overflow-hidden rounded-[1.75rem] transition-shadow duration-300 hover:shadow-[0_16px_40px_rgba(14,27,42,0.1)] dark:hover:shadow-[0_16px_40px_rgba(0,0,0,0.34)]"
               >
-                <div className="relative h-[420px] overflow-hidden">
+                <Link
+                  to={getDetailPath(aboutDetailIds[index])}
+                  className="relative block h-[420px] overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)]"
+                >
                   <div
                     className={`absolute inset-x-0 top-0 z-20 h-1 ${
                       isGuardian
@@ -172,7 +177,7 @@ export function AboutSection() {
                       </div>
                     </div>
                   </motion.div>
-                </div>
+                </Link>
               </motion.div>
             )
           })}

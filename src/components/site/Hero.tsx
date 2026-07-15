@@ -3,6 +3,7 @@ import { ChevronRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { heroBadges } from './content'
 import { Globe } from './Globe'
+import { useSectionHref } from './siteNavigation'
 import { RouteLines } from './RouteLines'
 import { easeOut, Reveal } from './shared'
 import type { Theme } from './types'
@@ -10,6 +11,8 @@ import type { Theme } from './types'
 export function Hero({ theme }: { theme: Theme }) {
   const isDark = theme === 'dark'
   const { t } = useTranslation()
+  const contactHref = useSectionHref('#contact')
+  const capabilitiesHref = useSectionHref('#capabilities')
   // NOTE (i18n scaffold, brief 3.3): the two-line gradient headline below is left as
   // hardcoded English rather than pulled through t() — its word order and the inline
   // gradient <span> both assume English sentence structure, so it needs a proper
@@ -101,7 +104,7 @@ export function Hero({ theme }: { theme: Theme }) {
 
             <Reveal delay={0.45} className="mt-8 flex flex-col items-start gap-3 sm:flex-row">
               <a
-                href="#contact"
+                href={contactHref}
                 className={`inline-flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold transition-transform duration-200 hover:scale-[1.02] ${
                   isDark
                     ? 'bg-white text-[var(--hero-bg)]'
@@ -111,7 +114,7 @@ export function Hero({ theme }: { theme: Theme }) {
                 {t('hero.ctaPrimary')} <ChevronRight className="ml-2 size-4" />
               </a>
               <a
-                href="#capabilities"
+                href={capabilitiesHref}
                 className={`inline-flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold transition-colors duration-200 ${
                   isDark
                     ? 'border border-white/20 text-white hover:border-white/40 hover:bg-white/5'

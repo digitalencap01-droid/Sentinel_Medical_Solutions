@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { DetailPage } from './components/site/DetailPage'
 import { Footer } from './components/site/Footer'
 import { Header } from './components/site/Header'
 import { Hero } from './components/site/Hero'
+import { LeadershipPage } from './components/site/LeadershipPage'
 import { SiteSections } from './components/site/Sections'
 import type { Theme } from './components/site/types'
 
@@ -9,6 +12,7 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [theme, setTheme] = useState<Theme>('light')
+  const location = useLocation()
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem('sentinel-theme')
@@ -42,6 +46,25 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [location.pathname, location.hash])
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.slice(1)
+      window.requestAnimationFrame(() => {
+        const element = document.getElementById(id)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      })
+      return
+    }
+
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }, [location.pathname, location.hash])
+
   const year = useMemo(() => new Date().getFullYear(), [])
 
   return (
@@ -56,8 +79,19 @@ function App() {
       />
 
       <main id="top">
-        <Hero theme={theme} />
-        <SiteSections />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero theme={theme} />
+                <SiteSections />
+              </>
+            }
+          />
+          <Route path="/leadership" element={<LeadershipPage />} />
+          <Route path="/details/:id" element={<DetailPage />} />
+        </Routes>
       </main>
 
       <Footer year={year} />

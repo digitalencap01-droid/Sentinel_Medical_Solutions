@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { BarChart3, Boxes, ChevronRight, Package, Pill, Stethoscope, Truck } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { capabilityCards } from './content'
+import { capabilityDetailIds, getDetailPath } from './detailContent'
 import { cardVariant, lightSection, SectionIntro, staggerContainer } from './shared'
 
 const capabilityIcons = [Pill, Stethoscope, Package, Boxes, Truck, BarChart3]
@@ -29,8 +31,12 @@ export function CapabilitiesSection() {
               <motion.div
                 key={card.title}
                 variants={cardVariant}
-                className="group relative overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-soft)] hover:shadow-[0_16px_40px_rgba(14,27,42,0.08)] dark:hover:shadow-[0_16px_40px_rgba(0,0,0,0.28)]"
+                className="group relative overflow-hidden rounded-[1.75rem] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(14,27,42,0.08)] dark:hover:shadow-[0_16px_40px_rgba(0,0,0,0.28)]"
               >
+                <Link
+                  to={getDetailPath(capabilityDetailIds[index])}
+                  className="block h-full rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-7 hover:border-[var(--accent-soft)]"
+                >
                 {/* Top sliding accent line */}
                 <div className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 rounded-full bg-gradient-to-r from-[#4FA8C9] via-[#7CC4DD] to-transparent transition-transform duration-500 ease-out group-hover:scale-x-100" />
 
@@ -64,6 +70,7 @@ export function CapabilitiesSection() {
                     </span>
                   </div>
                 </div>
+                </Link>
               </motion.div>
             )
           })}

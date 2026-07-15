@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { leadershipTeam } from './content'
+import { getDetailPath, leadershipDetailIds } from './detailContent'
 import { InitialsAvatar, lightSection, PlaceholderPhoto, PlaceholderRibbon, SectionIntro } from './shared'
 
 export function LeadershipSection() {
@@ -12,6 +15,16 @@ export function LeadershipSection() {
           body="A leadership group accountable for sourcing discipline, supply-chain integrity and partner-facing governance across every market Sentinel serves."
         />
 
+        <div className="mt-6">
+          <Link
+            to="/leadership"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--card-border)] bg-[var(--card-bg)] px-5 py-3 text-sm font-semibold text-[var(--text-strong)] transition-all hover:-translate-y-0.5 hover:border-[var(--accent-soft)] hover:text-[var(--accent)]"
+          >
+            Open Leadership Page
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
+
         <motion.div
           className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
           initial="hidden"
@@ -23,8 +36,12 @@ export function LeadershipSection() {
             <motion.div
               key={`${member.name}-${index}`}
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
-              className="group relative overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-soft)] hover:shadow-[0_16px_36px_rgba(79,168,201,0.1)]"
+              className="group relative overflow-hidden rounded-[1.75rem] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(79,168,201,0.1)]"
             >
+              <Link
+                to={getDetailPath(leadershipDetailIds[index])}
+                className="block rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 hover:border-[var(--accent-soft)]"
+              >
               {member.isPlaceholder ? (
                 <PlaceholderPhoto label="Photo pending" className="h-40 w-full" />
               ) : (
@@ -50,6 +67,7 @@ export function LeadershipSection() {
                 </p>
                 <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{member.bio}</p>
               </div>
+              </Link>
             </motion.div>
           ))}
         </motion.div>

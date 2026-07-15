@@ -1,7 +1,9 @@
 import { ArrowUp, Mail, MapPinned } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
+import logoImage from '../../assets/images/logo.png'
 import { navLinks } from './content'
-import { LogoMark } from './shared'
+import { resolveSectionHref, useSectionHref } from './siteNavigation'
 
 const companyLinks = navLinks.filter((link) =>
   ['#about', '#leadership', '#advisory-board', '#clients'].includes(link.href),
@@ -16,6 +18,8 @@ const presence = ['UAE', 'India', 'Africa']
 
 export function Footer({ year }: { year: number }) {
   const { t } = useTranslation()
+  const { pathname } = useLocation()
+  const contactHref = useSectionHref('#contact')
 
   return (
     <footer className="relative overflow-hidden bg-[var(--footer-bg)] text-[var(--footer-text)]">
@@ -28,16 +32,12 @@ export function Footer({ year }: { year: number }) {
       <div className="relative mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-12 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
           <div>
-            <div className="flex items-center gap-3">
-              <LogoMark />
-              <div>
-                <div className="text-xl font-extrabold tracking-[0.18em] text-[var(--footer-accent)]">
-                  SENTINEL
-                </div>
-                <div className="mt-1 text-[10px] uppercase tracking-[0.38em] text-[var(--footer-muted)]">
-                  Medical Solutions
-                </div>
-              </div>
+            <div className="inline-flex">
+              <img
+                src={logoImage}
+                alt="Sentinel Medical Solutions"
+                className="h-12 w-auto object-contain sm:h-14"
+              />
             </div>
             <p className="mt-5 max-w-xs text-sm leading-7 text-[var(--footer-muted)]">
               {t('footer.tagline')}
@@ -56,7 +56,7 @@ export function Footer({ year }: { year: number }) {
               {companyLinks.map((link) => (
                 <a
                   key={link.label}
-                  href={link.href}
+                  href={resolveSectionHref(pathname, link.href)}
                   className="w-fit transition-all duration-200 hover:translate-x-1 hover:text-[var(--footer-text)]"
                 >
                   {link.label}
@@ -73,7 +73,7 @@ export function Footer({ year }: { year: number }) {
               {platformLinks.map((link) => (
                 <a
                   key={link.label}
-                  href={link.href}
+                  href={resolveSectionHref(pathname, link.href)}
                   className="w-fit transition-all duration-200 hover:translate-x-1 hover:text-[var(--footer-text)]"
                 >
                   {link.label}
@@ -94,7 +94,7 @@ export function Footer({ year }: { year: number }) {
               info@sentinelmedical.com
             </a>
             <a
-              href="#contact"
+              href={contactHref}
               className="mt-5 inline-flex w-fit items-center gap-2 rounded-full border border-[var(--footer-border)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--footer-text)] transition-all duration-200 hover:border-[var(--footer-accent)] hover:bg-white/40"
             >
               {t('footer.ctaPartnership')}

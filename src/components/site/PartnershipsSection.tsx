@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { partnershipTracks } from './content'
+import { getDetailPath, partnershipItemDetailIds, partnershipTrackDetailIds } from './detailContent'
 import { easeOut, mutedSection, Reveal, SectionIntro, staggerContainer } from './shared'
 
 export function PartnershipsSection() {
@@ -16,6 +18,9 @@ export function PartnershipsSection() {
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
           {partnershipTracks.map((track, trackIndex) => {
             const Icon = track.icon
+            const baseItemIndex = partnershipTracks
+              .slice(0, trackIndex)
+              .reduce((sum, current) => sum + current.items.length, 0)
             return (
               <Reveal key={track.title} delay={trackIndex * 0.1}>
                 <motion.div
@@ -30,9 +35,11 @@ export function PartnershipsSection() {
                       <p className="font-mono text-[0.68rem] font-medium uppercase tracking-[0.28em] text-[var(--accent)]">
                         Partnership Track
                       </p>
-                      <h3 className="mt-3 text-[1.3rem] font-semibold leading-[1.05] tracking-[-0.02em] text-[var(--text-strong)]">
-                        {track.title}
-                      </h3>
+                      <Link to={getDetailPath(partnershipTrackDetailIds[trackIndex])} className="block">
+                        <h3 className="mt-3 text-[1.3rem] font-semibold leading-[1.05] tracking-[-0.02em] text-[var(--text-strong)]">
+                          {track.title}
+                        </h3>
+                      </Link>
                     </div>
                     <div className="inline-flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--accent-wash)] text-[var(--accent)] transition-transform duration-300 group-hover:rotate-[8deg] group-hover:scale-[1.04] dark:bg-white/8">
                       <Icon className="size-5" />
@@ -50,13 +57,18 @@ export function PartnershipsSection() {
                       <motion.div
                         key={item}
                         variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
-                        className="group/row flex items-center gap-3.5 rounded-[1rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-3.5 text-[var(--text-soft)] transition-all duration-300 hover:border-[var(--accent-soft)] hover:bg-[var(--accent-wash)] hover:-translate-y-0.5 dark:bg-white/4"
+                        className="rounded-[1rem]"
                       >
-                        <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--card-bg)] font-mono text-[0.66rem] font-medium text-[var(--accent)] border border-[var(--divider)]">
-                          {String(index + 1).padStart(2, '0')}
-                        </span>
-                        <span className="flex-1 text-[0.9rem] leading-6">{item}</span>
-                        <ChevronRight className="size-4 shrink-0 -translate-x-1 text-[var(--accent)] opacity-0 transition-all duration-300 group-hover/row:translate-x-0 group-hover/row:opacity-100" />
+                        <Link
+                          to={getDetailPath(partnershipItemDetailIds[baseItemIndex + index])}
+                          className="group/row flex items-center gap-3.5 rounded-[1rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-3.5 text-[var(--text-soft)] transition-all duration-300 hover:border-[var(--accent-soft)] hover:bg-[var(--accent-wash)] hover:-translate-y-0.5 dark:bg-white/4"
+                        >
+                          <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-[var(--divider)] bg-[var(--card-bg)] font-mono text-[0.66rem] font-medium text-[var(--accent)]">
+                            {String(index + 1).padStart(2, '0')}
+                          </span>
+                          <span className="flex-1 text-[0.9rem] leading-6">{item}</span>
+                          <ChevronRight className="size-4 shrink-0 -translate-x-1 text-[var(--accent)] opacity-0 transition-all duration-300 group-hover/row:translate-x-0 group-hover/row:opacity-100" />
+                        </Link>
                       </motion.div>
                     ))}
                   </motion.div>

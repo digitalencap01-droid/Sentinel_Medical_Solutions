@@ -1,8 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 import logoImage from '../../assets/images/logo.png'
 import { navLinks, primaryNavLinks } from './content'
+import { resolveSectionHref, useHomeHref, useSectionHref } from './siteNavigation'
 import { easeOut, ThemeToggle } from './shared'
 import type { Theme } from './types'
 
@@ -24,6 +26,9 @@ export function Header({
   onThemeToggle,
 }: HeaderProps) {
   const { t } = useTranslation()
+  const { pathname } = useLocation()
+  const homeHref = useHomeHref()
+  const contactHref = useSectionHref('#contact')
 
   return (
     <motion.header
@@ -34,7 +39,7 @@ export function Header({
       }`}
     >
       <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
-        <a href="#top" className="flex shrink-0 items-center">
+        <a href={homeHref} className="flex shrink-0 items-center">
           <img src={logoImage} alt="Sentinel Medical Solutions" className="h-14 w-auto object-contain" />
         </a>
 
@@ -42,7 +47,7 @@ export function Header({
           {primaryNavLinks.map((link) => (
             <a
               key={link.label}
-              href={link.href}
+              href={resolveSectionHref(pathname, link.href)}
               className="whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium text-[var(--text-soft)] transition-all duration-300 ease-out hover:bg-white/10 hover:text-[var(--accent)] hover:shadow-[0_2px_12px_rgba(15,23,42,0.06)] hover:backdrop-blur-md dark:hover:bg-white/[0.06]"
             >
               {link.label}
@@ -53,7 +58,7 @@ export function Header({
         <div className="hidden shrink-0 items-center gap-2 xl:flex">
           <ThemeToggle theme={theme} onToggle={onThemeToggle} />
           <a
-            href="#contact"
+            href={contactHref}
             className="inline-flex items-center whitespace-nowrap rounded-full bg-[var(--accent)] px-4.5 py-2.5 text-sm font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[var(--accent-strong)] hover:shadow-[0_10px_28px_rgba(23,88,110,0.32)]"
           >
             {t('header.cta')}
@@ -87,7 +92,7 @@ export function Header({
                 {navLinks.map((link) => (
                   <a
                     key={link.label}
-                    href={link.href}
+                    href={resolveSectionHref(pathname, link.href)}
                     className="py-3.5 text-base font-normal tracking-[-0.01em] text-[var(--text)] transition-colors duration-200 hover:text-[var(--accent)]"
                     onClick={onMenuClose}
                   >
@@ -96,7 +101,7 @@ export function Header({
                 ))}
               </div>
               <a
-                href="#contact"
+                href={contactHref}
                 className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-4 text-base font-semibold text-white"
                 onClick={onMenuClose}
               >

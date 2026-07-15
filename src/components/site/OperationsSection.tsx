@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import { ChevronRight, Stethoscope, Truck } from 'lucide-react'
 import { executionCapabilities, healthcareOperations, operatingSteps } from './content'
+import { executionDetailIds, getDetailPath, healthcareSupportDetailIds, operatingStepDetailIds } from './detailContent'
+import { Link } from 'react-router-dom'
 import { cardVariant, easeOut, lightSection, Reveal, SectionIntro, staggerContainer } from './shared'
 
 const operatingStepTags = [
@@ -65,7 +67,10 @@ export function OperationsSection() {
                 transition={{ duration: 0.24, ease: easeOut }}
                 className="group relative h-full"
               >
-                <div className="relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-5 transition-all duration-300 group-hover:border-[var(--accent-soft)] group-hover:shadow-[0_16px_40px_rgba(79,168,201,0.12)]">
+                <Link
+                  to={getDetailPath(operatingStepDetailIds[index])}
+                  className="relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-5 transition-all duration-300 group-hover:border-[var(--accent-soft)] group-hover:shadow-[0_16px_40px_rgba(79,168,201,0.12)]"
+                >
                   <div className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 rounded-full bg-gradient-to-r from-[#4FA8C9] via-[#7CC4DD] to-transparent transition-transform duration-500 ease-out group-hover:scale-x-100" />
 
                   <div className="relative flex flex-col items-center gap-2">
@@ -89,7 +94,7 @@ export function OperationsSection() {
                       <ChevronRight className="size-3.5" />
                     </span>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -124,8 +129,9 @@ export function OperationsSection() {
 
               <div className="mt-6 grid gap-3">
                 {executionCapabilities.map((item, index) => (
-                  <div
+                  <Link
                     key={item}
+                    to={getDetailPath(executionDetailIds[index])}
                     className="group/row flex items-center gap-3.5 rounded-[1rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-3.5 text-[var(--text-soft)] transition-all duration-300 hover:border-[var(--accent-soft)] hover:bg-[var(--accent-wash)] hover:-translate-y-0.5 dark:bg-white/4"
                   >
                     <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--card-bg)] font-mono text-[0.66rem] font-medium text-[var(--accent)]">
@@ -133,7 +139,7 @@ export function OperationsSection() {
                     </span>
                     <span className="flex-1 text-[0.9rem] leading-6">{item}</span>
                     <ChevronRight className="size-4 shrink-0 -translate-x-1 text-[var(--accent)] opacity-0 transition-all duration-300 group-hover/row:translate-x-0 group-hover/row:opacity-100" />
-                  </div>
+                  </Link>
                 ))}
               </div>
             </motion.div>
@@ -167,8 +173,9 @@ export function OperationsSection() {
 
               <div className="mt-6 grid gap-3 md:grid-cols-2">
                 {healthcareOperations.map((item, index) => (
-                  <div
+                  <Link
                     key={item}
+                    to={getDetailPath(healthcareSupportDetailIds[index])}
                     className="group/row flex items-center gap-3.5 rounded-[1rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-3.5 text-[var(--text-soft)] transition-all duration-300 hover:border-[var(--accent-soft)] hover:bg-[var(--accent-wash)] hover:-translate-y-0.5 dark:bg-white/4"
                   >
                     <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--card-bg)] font-mono text-[0.66rem] font-medium text-[var(--accent)]">
@@ -176,7 +183,7 @@ export function OperationsSection() {
                     </span>
                     <span className="flex-1 text-[0.88rem] leading-6">{item}</span>
                     <ChevronRight className="size-4 shrink-0 -translate-x-1 text-[var(--accent)] opacity-0 transition-all duration-300 group-hover/row:translate-x-0 group-hover/row:opacity-100" />
-                  </div>
+                  </Link>
                 ))}
               </div>
             </motion.div>

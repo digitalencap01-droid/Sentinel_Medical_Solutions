@@ -1,10 +1,23 @@
 import { motion } from 'framer-motion'
 import { Boxes, Building2, MapPinned, Route as RouteIcon } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { africaMarkets, coreLocations, globalCards, secondaryMarkets } from './content'
+import {
+  africaMarketDetailIds,
+  coreLocationDetailIds,
+  getDetailPath,
+  globalDetailIds,
+  secondaryMarketDetailIds,
+} from './detailContent'
 import { RouteLines } from './RouteLines'
 import { cardVariant, Reveal, SectionIntro, staggerContainer } from './shared'
 
 const globalIcons = [Building2, Boxes, RouteIcon]
+const globalFlagBackgrounds = [
+  'https://images.unsplash.com/photo-1720722023447-b00d085369d6?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1674591172888-1184c4170a47?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1675865395544-d583f3fb714f?q=80&w=725&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+]
 
 // Merged "Global Reach" + "Africa Strategy" into one section (brief §4, row 5). The
 // African country cards live as a sub-module here rather than a separate scroll stop —
@@ -40,8 +53,26 @@ export function GlobalReachSection() {
                   e.currentTarget.style.setProperty('--mx', `${e.clientX - rect.left}px`)
                   e.currentTarget.style.setProperty('--my', `${e.clientY - rect.top}px`)
                 }}
-                className="group relative overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[color:color-mix(in_srgb,var(--card-bg)_88%,transparent)] p-7 transition-colors duration-500 hover:border-[var(--accent-soft)]"
+                className="group relative h-full overflow-hidden rounded-[1.75rem] transition-colors duration-500"
               >
+                <Link
+                  to={getDetailPath(globalDetailIds[index])}
+                  className="flex h-full flex-col rounded-[1.75rem] border border-[var(--card-border)] bg-[color:color-mix(in_srgb,var(--card-bg)_88%,transparent)] p-7 hover:border-[var(--accent-soft)]"
+                >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 opacity-[0.34] transition-opacity duration-500 group-hover:opacity-[0.46]"
+                  style={{
+                    backgroundImage: `url(${globalFlagBackgrounds[index]})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center right',
+                    backgroundRepeat: 'no-repeat',
+                  }}
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.74)_42%,rgba(255,255,255,0.46)_100%)] dark:bg-[linear-gradient(90deg,rgba(15,28,44,0.9)_0%,rgba(15,28,44,0.66)_42%,rgba(15,28,44,0.34)_100%)]"
+                />
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -63,7 +94,8 @@ export function GlobalReachSection() {
                 <h3 className="relative mt-2 text-[1.5rem] font-semibold tracking-[-0.02em] text-[var(--text-strong)]">
                   {place}
                 </h3>
-                <p className="relative mt-4 text-[0.94rem] leading-7 text-[var(--muted)]">{card.body}</p>
+                <p className="relative mt-4 flex-1 text-[0.94rem] leading-7 text-[var(--muted)]">{card.body}</p>
+                </Link>
               </motion.div>
             )
           })}
@@ -77,9 +109,10 @@ export function GlobalReachSection() {
               Core Markets
             </div>
             <div className="mt-4 flex flex-wrap items-center gap-3">
-              {coreLocations.map((location) => (
-                <span
+              {coreLocations.map((location, index) => (
+                <Link
                   key={location.country}
+                  to={getDetailPath(coreLocationDetailIds[index])}
                   className="inline-flex items-center gap-1.5 rounded-full border border-[var(--card-border)] bg-[var(--accent-wash)] px-4 py-1.5 text-[0.82rem] font-medium text-[var(--accent)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent-soft)]"
                 >
                   {location.country}
@@ -88,7 +121,7 @@ export function GlobalReachSection() {
                       HQ
                     </span>
                   )}
-                </span>
+                </Link>
               ))}
             </div>
           </div>
@@ -102,13 +135,14 @@ export function GlobalReachSection() {
             <div className="mr-1 font-mono text-[0.66rem] font-medium uppercase tracking-[0.18em] text-[var(--muted)] opacity-70">
               Also Active In
             </div>
-            {secondaryMarkets.map((market) => (
-              <span
+            {secondaryMarkets.map((market, index) => (
+              <Link
                 key={market}
+                to={getDetailPath(secondaryMarketDetailIds[index])}
                 className="rounded-full border border-[var(--divider)] bg-[var(--surface-alt)] px-3 py-1 text-[0.76rem] font-medium text-[var(--text-soft)] opacity-80"
               >
                 {market}
-              </span>
+              </Link>
             ))}
           </div>
         </Reveal>
@@ -127,9 +161,10 @@ export function GlobalReachSection() {
           <Reveal className="relative mt-6 -mx-6 px-6 py-4 [mask-image:linear-gradient(90deg,transparent,black_64px,black_calc(100%-64px),transparent)] sm:-mx-10 sm:px-10 lg:-mx-16 lg:px-16">
             <div className="flex w-max gap-5 [animation:proof-marquee_42s_linear_infinite] hover:[animation-play-state:paused]">
               {[...africaMarkets, ...africaMarkets].map((market, index) => (
-                <div
+                <Link
                   key={`${market.country}-${index}`}
                   aria-hidden={index >= africaMarkets.length}
+                  to={getDetailPath(africaMarketDetailIds[index % africaMarkets.length])}
                   onMouseMove={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect()
                     e.currentTarget.style.setProperty('--mx', `${e.clientX - rect.left}px`)
@@ -161,7 +196,7 @@ export function GlobalReachSection() {
                     {market.country}
                   </h3>
                   <p className="relative mt-4 line-clamp-4 text-base leading-8 text-[var(--muted)]">{market.body}</p>
-                </div>
+                </Link>
               ))}
             </div>
           </Reveal>

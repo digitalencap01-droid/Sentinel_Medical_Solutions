@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { clients } from './content'
+import { clientDetailIds, getDetailPath } from './detailContent'
 import { lightSection, SectionIntro } from './shared'
 
 export function ClientsSection() {
@@ -21,43 +23,48 @@ export function ClientsSection() {
           viewport={{ once: true, amount: 0.2 }}
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
         >
-          {clients.map((client) => (
+          {clients.map((client, index) => (
             <motion.div
               key={client.name}
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.45 } } }}
-              className="flex h-28 flex-col items-center justify-center gap-2 rounded-[1.5rem] border border-[var(--card-border)] bg-[var(--card-bg)] px-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent-soft)] hover:shadow-[0_12px_28px_rgba(79,168,201,0.1)]"
+              className="rounded-[1.5rem] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(79,168,201,0.1)]"
             >
-              {hasRealLogo(client.logoUrl) ? (
-                <>
-                  <div
-                    className={`flex h-14 w-full items-center justify-center ${
-                      client.name === 'Imbono' || client.name === 'Sirius Holding'
-                        ? 'rounded-2xl bg-slate-900 px-4 py-3'
-                        : ''
-                    }`}
-                  >
-                    <img
-                      src={client.logoUrl}
-                      alt={`${client.name} logo`}
-                      className="max-h-full w-auto max-w-full object-contain"
-                      loading="lazy"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                  <span className="text-sm font-semibold tracking-[-0.02em] text-[var(--text-strong)]">
-                    {client.name}
-                  </span>
-                </>
-              ) : (
-                <>
-                  <span className="text-base font-semibold tracking-[-0.02em] text-[var(--text-strong)]">
-                    {client.name}
-                  </span>
-                  <span className="font-mono text-[0.6rem] font-medium uppercase tracking-[0.16em] text-[var(--text-soft)] opacity-60">
-                    Logo pending
-                  </span>
-                </>
-              )}
+              <Link
+                to={getDetailPath(clientDetailIds[index])}
+                className="flex h-28 flex-col items-center justify-center gap-2 rounded-[1.5rem] border border-[var(--card-border)] bg-[var(--card-bg)] px-4 text-center hover:border-[var(--accent-soft)]"
+              >
+                {hasRealLogo(client.logoUrl) ? (
+                  <>
+                    <div
+                      className={`flex h-14 w-full items-center justify-center ${
+                        client.name === 'Imbono' || client.name === 'Sirius Holding'
+                          ? 'rounded-2xl bg-slate-900 px-4 py-3'
+                          : ''
+                      }`}
+                    >
+                      <img
+                        src={client.logoUrl}
+                        alt={`${client.name} logo`}
+                        className="max-h-full w-auto max-w-full object-contain"
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                    <span className="text-sm font-semibold tracking-[-0.02em] text-[var(--text-strong)]">
+                      {client.name}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-base font-semibold tracking-[-0.02em] text-[var(--text-strong)]">
+                      {client.name}
+                    </span>
+                    <span className="font-mono text-[0.6rem] font-medium uppercase tracking-[0.16em] text-[var(--text-soft)] opacity-60">
+                      Logo pending
+                    </span>
+                  </>
+                )}
+              </Link>
             </motion.div>
           ))}
         </motion.div>
