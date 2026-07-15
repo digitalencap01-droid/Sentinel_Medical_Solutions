@@ -5,7 +5,15 @@ import { Footer } from './components/site/Footer'
 import { Header } from './components/site/Header'
 import { Hero } from './components/site/Hero'
 import { LeadershipPage } from './components/site/LeadershipPage'
+import { CapabilitiesSection } from './components/site/CapabilitiesSection'
+import { ClientsSection } from './components/site/ClientsSection'
+import { ContactSection } from './components/site/ContactSection'
+import { GlobalReachSection } from './components/site/GlobalReachSection'
+import { OperationsSection } from './components/site/OperationsSection'
+import { PartnershipsSection } from './components/site/PartnershipsSection'
 import { SiteSections } from './components/site/Sections'
+import { SupplyRangeSection } from './components/site/SupplyRangeSection'
+import { WhySentinelSection } from './components/site/WhySentinelSection'
 import type { Theme } from './components/site/types'
 
 function App() {
@@ -89,7 +97,16 @@ function App() {
               </>
             }
           />
+          <Route path="/capabilities" element={<CapabilitiesSection />} />
+          <Route path="/global-reach" element={<GlobalReachSection />} />
+          <Route path="/operations" element={<OperationsSection />} />
+          <Route path="/partnerships" element={<PartnershipsSection />} />
+          <Route path="/supply" element={<SupplyRangeSection />} />
           <Route path="/leadership" element={<LeadershipPage />} />
+          <Route path="/advisory-board" element={<LeadershipPage initialTab="advisory" />} />
+          <Route path="/clients" element={<ClientsSection />} />
+          <Route path="/why-sentinel" element={<WhySentinelSection />} />
+          <Route path="/contact" element={<ContactSection />} />
           <Route path="/details/:id" element={<DetailPage />} />
         </Routes>
       </main>

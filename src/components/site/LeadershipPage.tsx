@@ -96,10 +96,10 @@ function getAdvisoryProfile(index: number) {
   }
 }
 
-export function LeadershipPage() {
+export function LeadershipPage({ initialTab = 'leadership' }: { initialTab?: 'leadership' | 'advisory' }) {
   const profiles = leadershipTeam.map((_, index) => getLeadershipProfile(index)).filter(Boolean)
   const advisoryProfiles = advisoryBoard.map((_, index) => getAdvisoryProfile(index)).filter(Boolean)
-  const [activeTab, setActiveTab] = useState<'leadership' | 'advisory'>('leadership')
+  const [activeTab, setActiveTab] = useState<'leadership' | 'advisory'>(initialTab)
 
   const activeProfiles = activeTab === 'leadership' ? profiles : advisoryProfiles
 
