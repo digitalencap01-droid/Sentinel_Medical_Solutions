@@ -15,7 +15,7 @@ type HeaderProps = {
   onMenuClose: () => void
 }
 
-const primaryHashes = ['#about', '#capabilities', '#global-reach']
+const primaryHashes = ['#about', '#impact', '#strength', '#capabilities', '#global-reach']
 
 export function Header({ menuOpen, scrolled, onMenuToggle, onMenuClose }: HeaderProps) {
   const { t } = useTranslation()

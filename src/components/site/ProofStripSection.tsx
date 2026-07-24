@@ -22,7 +22,7 @@ export function ProofStripSection() {
   ]
 
   return (
-    <section className="overflow-hidden bg-[#F8F5EF]">
+    <section id="impact" className="overflow-hidden bg-[#F8F5EF]">
       <div className="px-6 py-18 sm:px-8 lg:px-12">
         <Reveal>
           <div className="relative px-0 py-8">

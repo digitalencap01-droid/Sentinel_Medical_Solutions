@@ -14,10 +14,10 @@ const mapPoints = [
 
 export function StrengthSection() {
   return (
-    <section className="bg-[var(--surface)] px-6 py-8 sm:px-8 lg:px-12">
+    <section id="strength" className="bg-[var(--surface)] px-6 py-8 sm:px-8 lg:px-12">
       <Reveal>
-        <div className="grid overflow-hidden rounded-[2rem] bg-white shadow-[0_26px_70px_rgba(15,23,42,0.08)] lg:grid-cols-[minmax(0,1.06fr)_minmax(0,1.12fr)]">
-          <div className="relative overflow-hidden px-8 py-12 sm:px-10 lg:px-12 lg:py-14">
+        <div className="grid lg:grid-cols-[minmax(0,1.06fr)_minmax(0,1.12fr)] lg:items-stretch">
+          <div className="relative overflow-hidden px-2 py-12 sm:px-4 lg:px-0 lg:py-14">
             <div className="absolute inset-0 opacity-70">
               <div className="absolute left-0 top-0 h-36 w-44 bg-[radial-gradient(circle,#f4ded0_1px,transparent_1px)] [background-size:8px_8px]" />
               <div className="absolute right-8 top-10 h-[72%] w-[58%] rounded-full border border-dashed border-[rgba(15,23,42,0.08)]" />
@@ -56,7 +56,7 @@ export function StrengthSection() {
             </div>
           </div>
 
-          <div className="relative min-h-[360px] lg:min-h-full">
+          <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] lg:ml-8 lg:min-h-full">
             <img
               src={warehouseImage}
               alt="Sentinel Medical Solutions warehouse operations"

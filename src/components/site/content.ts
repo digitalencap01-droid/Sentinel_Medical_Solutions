@@ -50,6 +50,8 @@ import type {
 // sub-module inside Global Reach & Presence now, not a separate scroll stop.
 export const navLinks: NavLink[] = [
   { label: 'About', href: '#about' },
+  { label: 'Our Impact', href: '#impact' },
+  { label: 'Our Strength', href: '#strength' },
   { label: 'Capabilities', href: '#capabilities' },
   { label: 'Global Reach', href: '#global-reach' },
   { label: 'How We Work', href: '#operations' },

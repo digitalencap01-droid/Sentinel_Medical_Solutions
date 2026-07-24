@@ -38,7 +38,7 @@ export function AboutSection() {
 
   return (
     <section id="about" className={`${lightSection} py-24`}>
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionIntro
           eyebrow={t('sections.about.eyebrow')}
           title={t('sections.about.title')}
