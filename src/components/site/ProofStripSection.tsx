@@ -11,44 +11,71 @@ import { CountUp, Reveal } from './shared'
 const tileIcons: LucideIcon[] = [Package, Users, Boxes, MapPinned, Handshake, Building2, Globe]
 
 export function ProofStripSection() {
-  const tiles = [topStats[0], credentials[0], topStats[1], credentials[1], topStats[2], credentials[2], topStats[3]]
-  // Duplicated once so the CSS marquee can loop seamlessly at -50% translateX.
-  const loopTiles = [...tiles, ...tiles]
+  const tiles = [
+    { ...credentials[1], eyebrow: 'Pharmacy Network', helper: 'Reach across the UAE' },
+    { ...topStats[2], eyebrow: 'Supplier Partnerships', helper: 'Trusted manufacturers worldwide' },
+    { ...credentials[2], eyebrow: 'MOHAP-Licensed Warehouse', helper: 'Strategically located in Abu Dhabi' },
+    { ...topStats[3], eyebrow: 'Global Operations', helper: 'Strong sourcing & supply chain execution' },
+    { ...topStats[0], eyebrow: 'Healthcare Products', helper: 'Across 10+ therapy categories' },
+    { ...credentials[0], eyebrow: 'Specialist Team', helper: 'Experienced healthcare professionals' },
+    { ...topStats[1], eyebrow: 'Clinical Supply Lines', helper: 'Broad consumables and recurring supply coverage' },
+  ]
 
   return (
-    <section className="overflow-hidden bg-[var(--surface-alt)]">
-      <div className="mx-auto max-w-7xl py-14">
+    <section className="overflow-hidden bg-[#F8F5EF]">
+      <div className="px-6 py-18 sm:px-8 lg:px-12">
         <Reveal>
-          <div className="relative py-4 [mask-image:linear-gradient(90deg,transparent,black_72px,black_calc(100%-72px),transparent)]">
-            <div
-              className="flex w-max gap-5 px-6 [animation:proof-marquee_34s_linear_infinite] hover:[animation-play-state:paused]"
-            >
-              {loopTiles.map((stat, index) => {
+          <div className="relative px-0 py-8">
+            <div className="relative mx-auto max-w-3xl text-center">
+              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-[var(--accent)]">
+                Our Impact
+              </p>
+              <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-slate-900 sm:text-4xl">
+                Delivering Healthcare. Building Trust.
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-500 sm:text-[0.95rem]">
+                Sentinel Medical Solutions connects global manufacturers with
+                <br />
+                healthcare providers through a reliable and efficient supply network.
+              </p>
+            </div>
+
+            <div className="relative mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7">
+              {tiles.map((stat, index) => {
                 const Icon = tileIcons[index % tileIcons.length]
                 return (
                   <Link
                     key={`${stat.label}-${index}`}
-                    aria-hidden={index >= tiles.length}
-                    to={getDetailPath(proofDetailIds[index % tiles.length])}
-                    className="group relative flex min-h-[212px] w-[224px] shrink-0 flex-col justify-start gap-3.5 overflow-hidden rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[var(--accent-soft)] hover:shadow-[0_22px_44px_rgba(79,168,201,0.16)]"
+                    to={getDetailPath(proofDetailIds[index])}
+                    className="group relative flex min-h-[250px] flex-col overflow-hidden rounded-[1.7rem] border border-[rgba(15,23,42,0.06)] bg-white/92 p-6 text-left shadow-[0_14px_40px_rgba(15,23,42,0.06)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-[0_24px_50px_rgba(249,115,22,0.12)]"
                   >
-                    <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 [background:radial-gradient(140px_100px_at_15%_-10%,rgba(79,168,201,0.14),transparent)]" />
-                    <div className="relative flex size-10 items-center justify-center rounded-xl bg-[var(--accent-wash)] transition-colors duration-300 group-hover:bg-[var(--accent)] dark:bg-white/6">
+                    <div className="relative flex size-12 items-center justify-center rounded-2xl bg-[rgba(249,115,22,0.08)] text-[var(--accent)]">
                       <Icon
-                        className="size-4.5 text-[var(--accent)] transition-colors duration-300 group-hover:text-white"
+                        className="size-5"
                         aria-hidden="true"
                       />
                     </div>
-                    <div className="relative font-mono text-[1.75rem] font-semibold leading-tight tracking-[-0.02em] text-[var(--accent)]">
+
+                    <div className="relative mt-8 font-mono text-[2.15rem] font-semibold leading-none tracking-[-0.05em] text-[var(--accent)]">
                       {stat.staticValue ? (
                         stat.staticValue
                       ) : (
                         <CountUp value={stat.value ?? 0} suffix={stat.suffix} prefix={stat.prefix} />
                       )}
                     </div>
-                    <p className="relative text-[0.8rem] leading-5 text-[var(--muted)]">
-                      {stat.label}
-                    </p>
+
+                    <div className="relative mt-3 space-y-2">
+                      <p className="text-[0.95rem] font-semibold leading-5 text-slate-900">
+                        {stat.eyebrow}
+                      </p>
+                      <p className="text-[0.82rem] leading-6 text-slate-500">
+                        {stat.helper}
+                      </p>
+                    </div>
+
+                    <div className="relative mt-auto pt-6">
+                      <span className="block h-[2px] w-7 rounded-full bg-[var(--accent)] transition-all duration-300 group-hover:w-11" />
+                    </div>
                   </Link>
                 )
               })}

@@ -22,7 +22,7 @@ export function Footer({ year }: { year: number }) {
   const contactHref = useSectionHref('#contact')
 
   return (
-    <footer className="relative overflow-hidden bg-[var(--footer-bg)] text-[var(--footer-text)]">
+    <footer className="relative overflow-hidden bg-[#F8F5EF] text-[var(--footer-text)]">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--footer-accent)]/30 to-transparent" />
       <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-60">
         <div className="absolute -left-24 top-0 size-72 rounded-full bg-[radial-gradient(circle,rgba(79, 168, 201,0.08),transparent_70%)] blur-3xl" />
