@@ -1,14 +1,10 @@
 import { motion, useInView } from 'framer-motion'
-import { ImageOff, Moon, SunMedium } from 'lucide-react'
+import { ImageOff } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import type { CountUpProps, RevealProps, Theme } from './types'
+import type { CountUpProps, RevealProps } from './types'
 
 export const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
-// Motion tuned calmer/slower for the redesign (brief §5) — durations nudged up and
-// stagger loosened slightly from the original snappier values, centralized here so
-// every Reveal/cardVariant/staggerContainer usage across the site shifts together.
 export const revealVariant = {
   hidden: { opacity: 0, y: 30 },
   visible: (delay = 0) => ({
@@ -37,10 +33,10 @@ export const cardVariant = {
 }
 
 export const lightSection =
-  'bg-[var(--surface)] text-[var(--text)] [background-image:radial-gradient(circle_at_top_left,rgba(79, 168, 201,0.05),transparent_30%)]'
+  'bg-[var(--surface)] text-[var(--text)] [background-image:radial-gradient(circle_at_top_left,rgba(241,90,42,0.07),transparent_30%)]'
 export const mutedSection = 'bg-[var(--surface-alt)] text-[var(--text)]'
 export const emphasisSection =
-  'bg-[var(--emphasis-surface)] text-[var(--emphasis-text)] [background-image:radial-gradient(circle_at_top_right,rgba(79, 168, 201,0.18),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent)]'
+  'bg-[var(--emphasis-surface)] text-[var(--emphasis-text)] [background-image:radial-gradient(circle_at_top_right,rgba(241,90,42,0.18),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.03),transparent)]'
 
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null)
@@ -148,7 +144,7 @@ export function InitialsAvatar({
   className?: string
 }) {
   const initials = /placeholder/i.test(name)
-    ? '—'
+    ? '-'
     : name
         .split(' ')
         .map((word) => word[0])
@@ -159,7 +155,7 @@ export function InitialsAvatar({
 
   return (
     <div
-      className={`flex items-center justify-center rounded-full border border-dashed border-[var(--card-border)] bg-[var(--accent-wash)] font-semibold text-[var(--accent)] dark:bg-white/6 dark:text-[var(--dark-accent)] ${className}`}
+      className={`flex items-center justify-center rounded-full border border-dashed border-[var(--card-border)] bg-[var(--accent-wash)] font-semibold text-[var(--accent)] ${className}`}
     >
       {initials}
     </div>
@@ -169,7 +165,7 @@ export function InitialsAvatar({
 export function PlaceholderPhoto({ label, className = '' }: { label: string; className?: string }) {
   return (
     <div
-      className={`flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-[var(--card-border)] bg-[var(--surface-alt)] text-[var(--text-soft)] dark:bg-white/4 ${className}`}
+      className={`flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-[var(--card-border)] bg-[var(--surface-alt)] text-[var(--text-soft)] ${className}`}
     >
       <ImageOff className="size-6 opacity-60" aria-hidden="true" />
       <span className="px-3 text-center text-[0.62rem] font-semibold uppercase tracking-[0.16em] opacity-70">
@@ -184,7 +180,7 @@ export function PlaceholderRibbon({ className = '' }: { className?: string }) {
     <span
       className={`inline-flex items-center gap-1.5 rounded-full border border-dashed border-[var(--accent-rare)] bg-[color:color-mix(in_srgb,var(--accent-rare)_12%,transparent)] px-3 py-1 font-mono text-[0.6rem] font-medium uppercase tracking-[0.16em] text-[var(--accent-rare)] ${className}`}
     >
-      Placeholder — awaiting client
+      Placeholder - awaiting client
     </span>
   )
 }
@@ -192,7 +188,7 @@ export function PlaceholderRibbon({ className = '' }: { className?: string }) {
 export function LogoMark() {
   return (
     <div
-      className="relative flex size-9 items-center justify-center overflow-hidden rounded-xl border border-[var(--logo-border)] shadow-[0_10px_28px_rgba(79, 168, 201,0.18)]"
+      className="relative flex size-9 items-center justify-center overflow-hidden rounded-xl border border-[var(--logo-border)] shadow-[0_10px_28px_rgba(241,90,42,0.18)]"
       style={{ backgroundImage: 'var(--logo-bg)' }}
     >
       <div className="absolute inset-[4px] rounded-lg border border-white/20" />
@@ -200,42 +196,8 @@ export function LogoMark() {
       <div className="absolute h-6.5 w-px rotate-45 bg-white/60" />
       <div className="absolute h-6.5 w-px -rotate-45 bg-white/60" />
       <div className="absolute h-px w-6.5 bg-white/70" />
-      <div className="absolute w-px h-6.5 bg-white/70" />
+      <div className="absolute h-6.5 w-px bg-white/70" />
       <div className="relative h-2.5 w-2.5 rounded-full bg-white shadow-[0_0_14px_rgba(255,255,255,0.7)]" />
     </div>
-  )
-}
-
-export function ThemeToggle({
-  theme,
-  onToggle,
-}: {
-  theme: Theme
-  onToggle: () => void
-}) {
-  const isDark = theme === 'dark'
-  const { t } = useTranslation()
-
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      aria-label={isDark ? t('header.themeToggleToLight') : t('header.themeToggleToDark')}
-      className="inline-flex items-center gap-1.5 rounded-full border border-[var(--header-border)] bg-[var(--header-surface)] px-2.5 py-1.5 text-[var(--text)] shadow-[0_6px_18px_rgba(15,23,42,0.06)] backdrop-blur-md transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[var(--accent-soft)] hover:bg-white/10"
-    >
-      <span className="relative flex h-5 w-9 items-center rounded-full bg-[var(--toggle-track)] px-1">
-        <motion.span
-          layout
-          transition={{ type: 'spring', stiffness: 450, damping: 28 }}
-          className="absolute size-3.5 rounded-full bg-white shadow-[0_4px_14px_rgba(0,0,0,0.25)]"
-          style={{ left: isDark ? '1.05rem' : '0.2rem' }}
-        />
-        <SunMedium className="relative z-10 size-3 text-[#fbbf24]" />
-        <Moon className="relative z-10 ml-auto size-3 text-[#93c5fd]" />
-      </span>
-      <span className="hidden text-sm font-medium sm:inline">
-        {isDark ? 'Dark' : 'Light'}
-      </span>
-    </button>
   )
 }

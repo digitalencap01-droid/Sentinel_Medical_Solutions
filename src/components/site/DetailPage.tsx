@@ -1,17 +1,31 @@
 import { motion } from 'framer-motion'
-import {
-  ArrowLeft,
-  ChevronDown,
-  ChevronRight,
-  ExternalLink,
-  ImageOff,
-  Layers3,
-  Sparkles,
-} from 'lucide-react'
+import { ArrowLeft, ChevronDown, ChevronRight, ImageOff, Layers3, Sparkles } from 'lucide-react'
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { detailRegistry, getDetailPath } from './detailContent'
 import { easeOut, Reveal } from './shared'
+
+function DetailImage({
+  src,
+  alt,
+  className = '',
+}: {
+  src?: string
+  alt?: string
+  className?: string
+}) {
+  if (!src) {
+    return (
+      <div
+        className={`flex items-center justify-center bg-[var(--surface-alt)] text-[var(--muted)] ${className}`}
+      >
+        <ImageOff className="size-10 opacity-60" />
+      </div>
+    )
+  }
+
+  return <img src={src} alt={alt ?? ''} className={className} />
+}
 
 function LeadershipProfilePage({
   detail,
@@ -23,116 +37,111 @@ function LeadershipProfilePage({
   const biographyParagraphs = detail.paragraphs.length > 0 ? detail.paragraphs : [detail.summary]
 
   return (
-    <section className="bg-[var(--surface)] pb-24 pt-24 text-[var(--text)]">
-      <div className="mx-auto max-w-[1600px]">
-        <div className="px-6">
-          <Link
-            to="/leadership"
-            className="inline-flex items-center gap-2 rounded-full border border-[var(--card-border)] bg-[var(--card-bg)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-soft)] transition-all hover:-translate-y-0.5 hover:border-[var(--accent-soft)] hover:text-[var(--accent)]"
-          >
-            <ArrowLeft className="size-3.5" />
-            Back to Leadership
-          </Link>
-        </div>
-
+    <section className="relative overflow-hidden bg-[var(--surface)] pb-24 pt-24 text-[var(--text)]">
+      <div className="absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_top_left,rgba(79,168,201,0.09),transparent_24%),linear-gradient(180deg,transparent,rgba(79,168,201,0.03))]" />
+      <div className="relative mx-auto max-w-7xl px-6">
         <Reveal>
-          <div className="mt-6 overflow-hidden border-y border-[var(--divider)] bg-[#edf5fb]">
-            <div className="grid items-stretch gap-0 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.72fr)]">
-              <div className="flex items-center px-6 py-12 sm:px-10 lg:px-16 lg:py-20">
-                <div className="max-w-3xl">
-                  <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">
-                    Leadership Profile
-                  </p>
-                  <h1 className="mt-5 text-[2.7rem] font-semibold leading-[1.02] tracking-[-0.05em] text-[#183f74] sm:text-[3.4rem]">
-                    {detail.title}
-                  </h1>
-                  <p className="mt-3 text-[1.2rem] leading-8 text-[#224f88] sm:text-[1.45rem]">
-                    {detail.summary}
-                  </p>
+          <div className="rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] shadow-[0_24px_60px_rgba(14,27,42,0.08)]">
+            <div className="grid gap-0 lg:grid-cols-[minmax(0,1.1fr)_420px]">
+              <div className="p-8 sm:p-10 lg:p-12">
+                <Link
+                  to="/leadership"
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--card-border)] bg-[var(--surface)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-soft)] transition-all hover:border-[var(--accent-soft)] hover:text-[var(--accent)]"
+                >
+                  <ArrowLeft className="size-3.5" />
+                  Back to Leadership
+                </Link>
+
+                <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-[var(--accent-soft)] bg-[var(--accent-wash)] px-3 py-1.5 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--accent)]">
+                  <Sparkles className="size-3.5" />
+                  Leadership Profile
                 </div>
+
+                <h1 className="mt-5 max-w-3xl text-[2.4rem] font-semibold leading-[1.02] tracking-[-0.045em] text-[var(--text-strong)] sm:text-[3rem]">
+                  {detail.title}
+                </h1>
+                <p className="mt-5 max-w-2xl text-[1rem] leading-8 text-[var(--muted)] sm:text-[1.05rem]">
+                  {detail.summary}
+                </p>
+
+                {detail.stats && detail.stats.length > 0 ? (
+                  <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                    {detail.stats.map((stat, index) => (
+                      <div
+                        key={stat}
+                        className="rounded-[1.25rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-4"
+                      >
+                        <div className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-[var(--accent)]">
+                          Snapshot {String(index + 1).padStart(2, '0')}
+                        </div>
+                        <p className="mt-2 text-sm leading-6 text-[var(--text-soft)]">{stat}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
               </div>
 
-              <div className="relative min-h-[320px] overflow-hidden rounded-bl-[4rem]">
-                <img
-                  src={detail.image}
-                  alt={detail.imageAlt}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                />
+              <div className="border-t border-[var(--divider)] bg-[var(--surface-alt)] p-5 lg:border-l lg:border-t-0 lg:p-6">
+                <div className="overflow-hidden rounded-[1.6rem]">
+                  <DetailImage src={detail.image} alt={detail.imageAlt} className="h-[360px] w-full object-cover" />
+                </div>
+                <div className="mt-5 rounded-[1.5rem] border border-[var(--divider)] bg-[var(--card-bg)] p-5">
+                  <div className="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-[var(--accent)]">
+                    Profile Focus
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-[var(--text-soft)]">
+                    {detail.highlights?.[0] ?? detail.summary}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </Reveal>
 
-        <div className="mx-auto mt-14 max-w-6xl px-6">
-          <div className="grid gap-10 xl:grid-cols-[minmax(0,1fr)_320px]">
-            <Reveal delay={0.05}>
+        <div className="mt-10 grid gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
+          <Reveal delay={0.05}>
+            <div className="rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-8 shadow-[0_20px_52px_rgba(14,27,42,0.06)] sm:p-10">
               <div className="max-w-4xl">
-                <div className="space-y-7">
+                <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">Biography</p>
+                <div className="mt-6 space-y-6">
                   {biographyParagraphs.map((paragraph) => (
-                    <p key={paragraph} className="text-[1.05rem] leading-[1.85] text-[var(--text-strong)]">
+                    <p key={paragraph} className="text-[1rem] leading-8 text-[var(--text-soft)]">
                       {paragraph}
                     </p>
                   ))}
                 </div>
               </div>
-            </Reveal>
-
-            <div className="space-y-5 xl:sticky xl:top-24 xl:self-start">
-              {detail.stats && detail.stats.length > 0 ? (
-                <Reveal delay={0.1}>
-                  <div className="rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 shadow-[0_16px_40px_rgba(14,27,42,0.06)]">
-                    <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">
-                      Executive Snapshot
-                    </p>
-                    <div className="mt-4 grid gap-3">
-                      {detail.stats.map((stat, index) => (
-                        <div
-                          key={stat}
-                          className="rounded-[1.1rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-4"
-                        >
-                          <div className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-[var(--accent)]">
-                            Profile {String(index + 1).padStart(2, '0')}
-                          </div>
-                          <p className="mt-2 text-sm leading-6 text-[var(--text-soft)]">{stat}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </Reveal>
-              ) : null}
-
-              {relatedItems.length > 0 ? (
-                <Reveal delay={0.14}>
-                  <div className="rounded-[1.75rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 shadow-[0_16px_40px_rgba(14,27,42,0.06)]">
-                    <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">
-                      Related Pages
-                    </p>
-                    <div className="mt-4 grid gap-3">
-                      {relatedItems.map((item) => (
-                        <Link
-                          key={item.id}
-                          to={getDetailPath(item.id)}
-                          className="group rounded-[1.15rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-4 transition-all hover:border-[var(--accent-soft)] hover:bg-[var(--accent-wash)]"
-                        >
-                          <div className="flex items-center justify-between gap-3">
-                            <div>
-                              <p className="text-sm font-semibold text-[var(--text-strong)]">{item.title}</p>
-                              <p className="mt-1 text-xs uppercase tracking-[0.12em] text-[var(--muted)]">
-                                {item.section}
-                              </p>
-                            </div>
-                            <ChevronRight className="size-4 text-[var(--accent)] transition-transform group-hover:translate-x-0.5" />
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </Reveal>
-              ) : null}
             </div>
-          </div>
+          </Reveal>
+
+          <aside className="space-y-5 xl:sticky xl:top-24 xl:self-start">
+            {relatedItems.length > 0 ? (
+              <Reveal delay={0.1}>
+                <div className="rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 shadow-[0_20px_52px_rgba(14,27,42,0.06)]">
+                  <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">Related Pages</p>
+                  <div className="mt-5 grid gap-3">
+                    {relatedItems.map((item) => (
+                      <Link
+                        key={item.id}
+                        to={getDetailPath(item.id)}
+                        className="group rounded-[1.25rem] border border-[var(--divider)] bg-[var(--surface-alt)] p-4 transition-all hover:border-[var(--accent-soft)] hover:bg-[var(--accent-wash)]"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <div>
+                            <p className="text-sm font-semibold text-[var(--text-strong)]">{item.title}</p>
+                            <p className="mt-1 text-xs uppercase tracking-[0.12em] text-[var(--muted)]">
+                              {item.section}
+                            </p>
+                          </div>
+                          <ChevronRight className="size-4 text-[var(--accent)] transition-transform group-hover:translate-x-0.5" />
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            ) : null}
+          </aside>
         </div>
       </div>
     </section>
@@ -174,8 +183,20 @@ export function DetailPage() {
 
   const relatedItems = (detail.relatedIds ?? []).map((relatedId) => detailRegistry[relatedId]).filter(Boolean)
   const statCards = detail.stats?.slice(0, 4) ?? []
-  const leadHighlight = detail.highlights?.[0]
-  const secondaryHighlights = detail.highlights?.slice(1, 5) ?? []
+  const leadHighlight = detail.highlights?.[0] ?? detail.summary
+  const supportHighlights = detail.highlights?.slice(1, 5) ?? []
+  const galleryItems =
+    detail.gallery && detail.gallery.length > 0
+      ? detail.gallery
+      : detail.image
+        ? [
+            {
+              src: detail.image,
+              alt: detail.imageAlt,
+              caption: 'Primary topic visual.',
+            },
+          ]
+        : []
 
   if (detail.section === 'Leadership') {
     return <LeadershipProfilePage detail={detail} relatedItems={relatedItems} />
@@ -183,97 +204,82 @@ export function DetailPage() {
 
   return (
     <section className="relative overflow-hidden bg-[var(--surface)] pb-24 pt-24 text-[var(--text)]">
-      <div className="absolute inset-0 opacity-70 [background-image:radial-gradient(circle_at_top_left,rgba(79,168,201,0.08),transparent_26%),radial-gradient(circle_at_85%_14%,rgba(79,168,201,0.07),transparent_22%),linear-gradient(180deg,transparent,rgba(79,168,201,0.02))]" />
+      <div className="absolute inset-0 opacity-80 [background-image:radial-gradient(circle_at_top_left,rgba(79,168,201,0.08),transparent_24%),radial-gradient(circle_at_90%_18%,rgba(79,168,201,0.06),transparent_22%),linear-gradient(180deg,transparent,rgba(79,168,201,0.03))]" />
+
       <div className="relative mx-auto max-w-7xl px-6">
         <Reveal>
-          <div className="rounded-[2rem] border border-[var(--card-border)] bg-[color:color-mix(in_srgb,var(--card-bg)_84%,transparent)] p-3 shadow-[0_24px_64px_rgba(14,27,42,0.08)] backdrop-blur-sm">
-            <div className="grid gap-0 overflow-hidden rounded-[1.6rem] bg-[var(--surface-alt)] lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)]">
-              <div className="relative flex flex-col justify-between overflow-hidden p-7 sm:p-9 lg:p-10">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(79,168,201,0.12),transparent_28%)]" />
-                <div className="absolute -right-24 top-16 size-56 rounded-full bg-[radial-gradient(circle,rgba(79,168,201,0.12),transparent_66%)] blur-3xl" />
+          <div className="overflow-hidden rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] shadow-[0_24px_64px_rgba(14,27,42,0.08)]">
+            <div className="grid gap-0 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)]">
+              <div className="p-8 sm:p-10 lg:p-12">
+                <Link
+                  to="/"
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--card-border)] bg-[var(--surface)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-soft)] transition-all hover:border-[var(--accent-soft)] hover:text-[var(--accent)]"
+                >
+                  <ArrowLeft className="size-3.5" />
+                  Back to Home
+                </Link>
 
-                <div className="relative">
-                  <Link
-                    to="/"
-                    className="inline-flex items-center gap-2 rounded-full border border-[var(--card-border)] bg-[var(--card-bg)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text-soft)] transition-all hover:-translate-y-0.5 hover:border-[var(--accent-soft)] hover:text-[var(--accent)]"
-                  >
-                    <ArrowLeft className="size-3.5" />
-                    Back to Home
-                  </Link>
-
-                  <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-[var(--accent-soft)] bg-[var(--accent-wash)] px-3 py-1.5 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--accent)]">
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-soft)] bg-[var(--accent-wash)] px-3 py-1.5 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--accent)]">
                     <Sparkles className="size-3.5" />
                     {detail.eyebrow}
                   </div>
-
-                  <h1 className="mt-5 max-w-3xl text-[2.3rem] font-semibold leading-[0.98] tracking-[-0.05em] text-[var(--text-strong)] sm:text-[3rem] xl:text-[3.5rem]">
-                    {detail.title}
-                  </h1>
-                  <p className="mt-5 max-w-2xl text-[1rem] leading-8 text-[var(--muted)] sm:text-[1.04rem]">
-                    {detail.summary}
-                  </p>
-                </div>
-
-                <div className="relative mt-8 grid gap-3 sm:grid-cols-2">
-                  {statCards.map((stat, index) => (
-                    <motion.div
-                      key={stat}
-                      initial={{ opacity: 0, y: 18 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.45, delay: 0.08 * index, ease: easeOut }}
-                      className="rounded-[1.35rem] border border-[var(--card-border)] bg-[var(--card-bg)] px-4 py-4 shadow-[0_8px_20px_rgba(14,27,42,0.04)]"
-                    >
-                      <div className="font-mono text-[0.64rem] uppercase tracking-[0.2em] text-[var(--accent)]">
-                        Snapshot {String(index + 1).padStart(2, '0')}
-                      </div>
-                      <div className="mt-2 text-sm leading-6 text-[var(--text-soft)]">{stat}</div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="relative min-h-[320px] border-t border-[var(--card-border)] lg:min-h-[100%] lg:border-l lg:border-t-0">
-                {detail.image ? (
-                  <img src={detail.image} alt={detail.imageAlt} className="absolute inset-0 h-full w-full object-cover" />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center bg-[var(--surface-alt)] text-[var(--muted)]">
-                    <ImageOff className="size-10 opacity-60" />
-                  </div>
-                )}
-
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,27,42,0.1),rgba(14,27,42,0.64))]" />
-                <div className="absolute inset-x-0 top-0 p-5 sm:p-6">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-white/16 bg-black/10 px-3 py-1.5 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-white/82 backdrop-blur-sm">
-                    <Layers3 className="size-3.5" />
+                  <div className="inline-flex items-center gap-2 rounded-full border border-[var(--divider)] bg-[var(--surface-alt)] px-3 py-1.5 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--text-soft)]">
+                    <Layers3 className="size-3.5 text-[var(--accent)]" />
                     {detail.section}
                   </div>
                 </div>
 
-                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                  <div className="rounded-[1.5rem] border border-white/14 bg-white/10 p-5 backdrop-blur-xl">
-                    <div className="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-white/70">
-                      Detail Focus
-                    </div>
-                    <p className="mt-3 text-sm leading-7 text-white/92">
-                      {leadHighlight ?? detail.summary}
-                    </p>
+                <h1 className="mt-5 max-w-3xl text-[2.4rem] font-semibold leading-[1.02] tracking-[-0.05em] text-[var(--text-strong)] sm:text-[3rem] xl:text-[3.45rem]">
+                  {detail.title}
+                </h1>
+                <p className="mt-5 max-w-2xl text-[1rem] leading-8 text-[var(--muted)] sm:text-[1.05rem]">
+                  {detail.summary}
+                </p>
+
+                {statCards.length > 0 ? (
+                  <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                    {statCards.map((stat, index) => (
+                      <motion.div
+                        key={stat}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.42, delay: index * 0.05, ease: easeOut }}
+                        className="rounded-[1.25rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-4"
+                      >
+                        <div className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-[var(--accent)]">
+                          Snapshot {String(index + 1).padStart(2, '0')}
+                        </div>
+                        <p className="mt-2 text-sm leading-6 text-[var(--text-soft)]">{stat}</p>
+                      </motion.div>
+                    ))}
                   </div>
+                ) : null}
+              </div>
+
+              <div className="border-t border-[var(--divider)] bg-[var(--surface-alt)] p-5 lg:border-l lg:border-t-0 lg:p-6">
+                <div className="overflow-hidden rounded-[1.6rem]">
+                  <DetailImage src={detail.image} alt={detail.imageAlt} className="h-[340px] w-full object-cover lg:h-[420px]" />
+                </div>
+
+                <div className="mt-5 rounded-[1.5rem] border border-[var(--divider)] bg-[var(--card-bg)] p-5">
+                  <div className="font-mono text-[0.68rem] uppercase tracking-[0.2em] text-[var(--accent)]">
+                    Detail Focus
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-[var(--text-soft)]">{leadHighlight}</p>
                 </div>
               </div>
             </div>
           </div>
         </Reveal>
 
-        <div className="mt-10 grid gap-8 xl:grid-cols-[minmax(0,1fr)_340px]">
+        <div className="mt-10 grid gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
           <div className="space-y-8">
             <Reveal delay={0.05}>
-              <div className="overflow-hidden rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] shadow-[0_20px_52px_rgba(14,27,42,0.06)]">
-                <div className="grid gap-px bg-[var(--divider)] lg:grid-cols-[minmax(0,1.08fr)_minmax(280px,0.92fr)]">
-                  <div className="bg-[var(--card-bg)] p-7 md:p-8">
-                    <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">
-                      <span className="size-2 rounded-full bg-[var(--accent)]" />
-                      Overview
-                    </div>
+              <div className="rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-8 shadow-[0_20px_52px_rgba(14,27,42,0.06)] sm:p-10">
+                <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(260px,0.9fr)]">
+                  <div>
+                    <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">Overview</p>
                     <div className="mt-6 space-y-5">
                       {detail.paragraphs.map((paragraph) => (
                         <p key={paragraph} className="text-[0.98rem] leading-8 text-[var(--text-soft)]">
@@ -283,32 +289,31 @@ export function DetailPage() {
                     </div>
                   </div>
 
-                  <div className="bg-[var(--surface-alt)] p-7 md:p-8">
-                    <div className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">
-                      Why It Matters
-                    </div>
-                    <div className="mt-5 rounded-[1.5rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-5">
-                      <p className="text-[1.15rem] font-semibold leading-7 tracking-[-0.02em] text-[var(--text-strong)]">
-                        {detail.title}
-                      </p>
-                      <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
-                        This page turns a static homepage item into a richer destination with context, clearer structure and a more immersive browsing experience.
+                  <div className="space-y-4">
+                    <div className="rounded-[1.5rem] border border-[var(--divider)] bg-[var(--surface-alt)] p-5">
+                      <div className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--accent)]">
+                        Why It Matters
+                      </div>
+                      <p className="mt-3 text-sm leading-7 text-[var(--text-soft)]">
+                        This page gives the topic a clear structure, stronger context, and a cleaner reading flow for clients, partners, and procurement teams.
                       </p>
                     </div>
 
-                    {secondaryHighlights.length > 0 ? (
-                      <div className="mt-5 space-y-3">
-                        {secondaryHighlights.map((highlight, index) => (
-                          <div
-                            key={highlight}
-                            className="flex gap-3 rounded-[1.25rem] border border-[var(--card-border)] bg-[var(--card-bg)] px-4 py-4"
-                          >
-                            <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--accent-wash)] font-mono text-[0.66rem] text-[var(--accent)]">
-                              {String(index + 1).padStart(2, '0')}
+                    {supportHighlights.length > 0 ? (
+                      <div className="rounded-[1.5rem] border border-[var(--divider)] bg-[var(--surface-alt)] p-5">
+                        <div className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--accent)]">
+                          Priority Points
+                        </div>
+                        <div className="mt-4 space-y-3">
+                          {supportHighlights.map((highlight, index) => (
+                            <div key={highlight} className="flex gap-3">
+                              <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-[var(--card-bg)] font-mono text-[0.66rem] text-[var(--accent)]">
+                                {String(index + 1).padStart(2, '0')}
+                              </div>
+                              <p className="text-sm leading-6 text-[var(--text-soft)]">{highlight}</p>
                             </div>
-                            <p className="text-[0.92rem] leading-6 text-[var(--text-soft)]">{highlight}</p>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
                     ) : null}
                   </div>
@@ -318,15 +323,15 @@ export function DetailPage() {
 
             {detail.highlights && detail.highlights.length > 0 ? (
               <Reveal delay={0.1}>
-                <div className="rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-7 shadow-[0_20px_52px_rgba(14,27,42,0.06)] md:p-8">
-                  <div className="flex items-center justify-between gap-4">
-                    <div>
+                <div className="rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-8 shadow-[0_20px_52px_rgba(14,27,42,0.06)] sm:p-10">
+                  <div className="flex flex-wrap items-end justify-between gap-4">
+                    <div className="max-w-2xl">
                       <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">Highlights</p>
-                      <h2 className="mt-3 text-[1.5rem] font-semibold tracking-[-0.03em] text-[var(--text-strong)]">
-                        Key points connected to this topic.
+                      <h2 className="mt-3 text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--text-strong)] sm:text-[1.65rem]">
+                        Key points connected to this topic
                       </h2>
                     </div>
-                    <div className="hidden rounded-full border border-[var(--card-border)] bg-[var(--surface-alt)] px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--text-soft)] sm:inline-flex">
+                    <div className="rounded-full border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--text-soft)]">
                       {detail.highlights.length} items
                     </div>
                   </div>
@@ -339,11 +344,10 @@ export function DetailPage() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.2 }}
                         transition={{ duration: 0.4, delay: index * 0.04, ease: easeOut }}
-                        className="group relative overflow-hidden rounded-[1.45rem] border border-[var(--divider)] bg-[var(--surface-alt)] p-5 transition-all hover:-translate-y-0.5 hover:border-[var(--accent-soft)] hover:bg-[color:color-mix(in_srgb,var(--accent-wash)_72%,var(--surface-alt))]"
+                        className="rounded-[1.35rem] border border-[var(--divider)] bg-[var(--surface-alt)] p-5"
                       >
-                        <div className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-[#4FA8C9] via-[#7CC4DD] to-transparent transition-transform duration-500 group-hover:scale-x-100" />
                         <div className="flex items-start gap-4">
-                          <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[var(--card-bg)] font-mono text-[0.68rem] text-[var(--accent)] shadow-[0_6px_16px_rgba(14,27,42,0.05)]">
+                          <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[var(--card-bg)] font-mono text-[0.66rem] text-[var(--accent)]">
                             {String(index + 1).padStart(2, '0')}
                           </div>
                           <p className="text-[0.95rem] leading-7 text-[var(--text-soft)]">{highlight}</p>
@@ -355,91 +359,81 @@ export function DetailPage() {
               </Reveal>
             ) : null}
 
-            <Reveal delay={0.12}>
-              <div className="rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-7 shadow-[0_20px_52px_rgba(14,27,42,0.06)] md:p-8">
-                <div className="max-w-2xl">
-                  <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">Visual Story</p>
-                  <h2 className="mt-3 text-[1.5rem] font-semibold tracking-[-0.03em] text-[var(--text-strong)]">
-                    {detail.galleryTitle ?? `${detail.title} in focus.`}
-                  </h2>
-                  <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
-                    {detail.galleryIntro ??
-                      `Supporting visuals make ${detail.title.toLowerCase()} easier to explore and give the page more presence on mobile and desktop.`}
-                  </p>
-                </div>
+            {galleryItems.length > 0 ? (
+              <Reveal delay={0.12}>
+                <div className="rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-8 shadow-[0_20px_52px_rgba(14,27,42,0.06)] sm:p-10">
+                  <div className="max-w-2xl">
+                    <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">Visual Story</p>
+                    <h2 className="mt-3 text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--text-strong)] sm:text-[1.65rem]">
+                      {detail.galleryTitle ?? `${detail.title} in focus`}
+                    </h2>
+                    <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
+                      {detail.galleryIntro ??
+                        `Supporting visuals help explain ${detail.title.toLowerCase()} in a cleaner and more tangible way.`}
+                    </p>
+                  </div>
 
-                <div className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
-                  {(detail.gallery ?? [
-                    {
-                      src: detail.image,
-                      alt: detail.imageAlt,
-                      caption: 'Primary topic visual.',
-                    },
-                  ]).slice(0, 1).map((image) => (
-                    <div key={image.src} className="group overflow-hidden rounded-[1.6rem] border border-[var(--divider)] bg-[var(--surface-alt)]">
+                  <div className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+                    <div className="overflow-hidden rounded-[1.5rem] border border-[var(--divider)] bg-[var(--surface-alt)]">
                       <div className="relative h-[320px] overflow-hidden">
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                        <DetailImage
+                          src={galleryItems[0]?.src}
+                          alt={galleryItems[0]?.alt}
+                          className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
                         />
-                        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,27,42,0.06),rgba(14,27,42,0.38))]" />
                       </div>
                       <div className="p-5">
-                        <p className="text-sm leading-7 text-[var(--text-soft)]">{image.caption}</p>
+                        <p className="text-sm leading-7 text-[var(--text-soft)]">{galleryItems[0]?.caption}</p>
                       </div>
                     </div>
-                  ))}
 
-                  <div className="grid gap-4">
-                    {(detail.gallery ?? []).slice(1, 3).map((image, index) => (
-                      <div
-                        key={image.src}
-                        className="group overflow-hidden rounded-[1.45rem] border border-[var(--divider)] bg-[var(--surface-alt)]"
-                      >
-                        <div className="relative h-[180px] overflow-hidden">
-                          <img
-                            src={image.src}
-                            alt={image.alt}
-                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-                          />
-                          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(14,27,42,0.04),rgba(14,27,42,0.28))]" />
-                          <div className="absolute left-4 top-4 rounded-full bg-white/85 px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-[var(--accent)]">
-                            Image {String(index + 2).padStart(2, '0')}
+                    <div className="grid gap-4">
+                      {galleryItems.slice(1, 3).map((image, index) => (
+                        <div
+                          key={image.src}
+                          className="overflow-hidden rounded-[1.4rem] border border-[var(--divider)] bg-[var(--surface-alt)]"
+                        >
+                          <div className="relative h-[180px] overflow-hidden">
+                            <DetailImage
+                              src={image.src}
+                              alt={image.alt}
+                              className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.04]"
+                            />
+                          </div>
+                          <div className="p-4">
+                            <div className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-[var(--accent)]">
+                              Image {String(index + 2).padStart(2, '0')}
+                            </div>
+                            <p className="mt-2 text-[0.9rem] leading-6 text-[var(--text-soft)]">{image.caption}</p>
                           </div>
                         </div>
-                        <div className="p-4">
-                          <p className="text-[0.9rem] leading-6 text-[var(--text-soft)]">{image.caption}</p>
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Reveal>
+              </Reveal>
+            ) : null}
 
             {detail.faqs && detail.faqs.length > 0 ? (
               <Reveal delay={0.14}>
-                <div className="rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-7 shadow-[0_20px_52px_rgba(14,27,42,0.06)] md:p-8">
+                <div className="rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-8 shadow-[0_20px_52px_rgba(14,27,42,0.06)] sm:p-10">
                   <div className="max-w-2xl">
                     <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">FAQs</p>
-                    <h2 className="mt-3 text-[1.5rem] font-semibold tracking-[-0.03em] text-[var(--text-strong)]">
-                      Common questions visitors may ask here.
+                    <h2 className="mt-3 text-[1.45rem] font-semibold tracking-[-0.03em] text-[var(--text-strong)] sm:text-[1.65rem]">
+                      Common questions about this area
                     </h2>
-                    <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
-                      These answers help the page feel complete and support users who want quick clarity before moving deeper into the site.
-                    </p>
                   </div>
 
                   <div className="mt-6 space-y-3">
                     {detail.faqs.map((faq, index) => {
                       const isOpen = openFaqIndex === index
+
                       return (
                         <div
                           key={faq.question}
-                          className={`overflow-hidden rounded-[1.35rem] border transition-all ${
+                          className={`overflow-hidden rounded-[1.35rem] border transition-colors ${
                             isOpen
-                              ? 'border-[var(--accent-soft)] bg-[color:color-mix(in_srgb,var(--accent-wash)_54%,var(--surface-alt))]'
+                              ? 'border-[var(--accent-soft)] bg-[var(--accent-wash)]'
                               : 'border-[var(--divider)] bg-[var(--surface-alt)]'
                           }`}
                         >
@@ -487,40 +481,38 @@ export function DetailPage() {
 
           <aside className="space-y-5 xl:sticky xl:top-24 xl:self-start">
             <Reveal delay={0.08}>
-              <div className="overflow-hidden rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] shadow-[0_20px_52px_rgba(14,27,42,0.06)]">
-                <div className="border-b border-[var(--divider)] bg-[var(--surface-alt)] px-6 py-5">
-                  <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">Quick Navigation</p>
-                  <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-                    Move through connected pages without going back and losing context.
-                  </p>
-                </div>
-
-                <div className="p-6">
-                  <Link
-                    to="/"
-                    className="group flex items-center justify-between rounded-[1.35rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-4 transition-all hover:border-[var(--accent-soft)] hover:bg-[var(--accent-wash)]"
-                  >
-                    <div>
-                      <p className="text-sm font-semibold text-[var(--text-strong)]">Return to Homepage</p>
-                      <p className="mt-1 text-xs uppercase tracking-[0.12em] text-[var(--muted)]">Main site overview</p>
+              <div className="rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 shadow-[0_20px_52px_rgba(14,27,42,0.06)]">
+                <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">Page Summary</p>
+                <div className="mt-5 space-y-3">
+                  <div className="rounded-[1.25rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-4">
+                    <div className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-[var(--accent)]">
+                      Category
                     </div>
-                    <ExternalLink className="size-4 text-[var(--accent)] transition-transform group-hover:translate-x-0.5" />
-                  </Link>
+                    <p className="mt-2 text-sm font-semibold text-[var(--text-strong)]">{detail.section}</p>
+                  </div>
 
-                  <div className="mt-4 grid gap-3">
-                    {statCards.map((stat, index) => (
-                      <div
-                        key={stat}
-                        className="rounded-[1.2rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-4"
-                      >
-                        <div className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-[var(--accent)]">
-                          Quick Fact {String(index + 1).padStart(2, '0')}
-                        </div>
-                        <div className="mt-2 text-sm leading-6 text-[var(--text-soft)]">{stat}</div>
-                      </div>
-                    ))}
+                  <div className="rounded-[1.25rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-4">
+                    <div className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-[var(--accent)]">
+                      Topic
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-[var(--text-soft)]">{detail.eyebrow}</p>
+                  </div>
+
+                  <div className="rounded-[1.25rem] border border-[var(--divider)] bg-[var(--surface-alt)] px-4 py-4">
+                    <div className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-[var(--accent)]">
+                      Focus
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-[var(--text-soft)]">{leadHighlight}</p>
                   </div>
                 </div>
+
+                <Link
+                  to="/"
+                  className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_36px_rgba(79,168,201,0.24)] transition-transform hover:-translate-y-0.5"
+                >
+                  <ArrowLeft className="size-4" />
+                  Return to Homepage
+                </Link>
               </div>
             </Reveal>
 
@@ -528,16 +520,12 @@ export function DetailPage() {
               <Reveal delay={0.12}>
                 <div className="rounded-[2rem] border border-[var(--card-border)] bg-[var(--card-bg)] p-6 shadow-[0_20px_52px_rgba(14,27,42,0.06)]">
                   <p className="font-mono text-xs uppercase tracking-[0.22em] text-[var(--accent)]">Related Pages</p>
-                  <h3 className="mt-3 text-[1.15rem] font-semibold tracking-[-0.02em] text-[var(--text-strong)]">
-                    Continue exploring connected content.
-                  </h3>
-
                   <div className="mt-5 grid gap-3">
                     {relatedItems.map((item, index) => (
                       <Link
                         key={item.id}
                         to={getDetailPath(item.id)}
-                        className="group rounded-[1.3rem] border border-[var(--divider)] bg-[var(--surface-alt)] p-4 transition-all hover:-translate-y-0.5 hover:border-[var(--accent-soft)] hover:bg-[color:color-mix(in_srgb,var(--accent-wash)_72%,var(--surface-alt))]"
+                        className="group rounded-[1.25rem] border border-[var(--divider)] bg-[var(--surface-alt)] p-4 transition-all hover:border-[var(--accent-soft)] hover:bg-[var(--accent-wash)]"
                       >
                         <div className="flex items-start justify-between gap-3">
                           <div className="min-w-0">

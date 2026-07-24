@@ -3,31 +3,21 @@ import { ChevronDown, ChevronRight, Menu, X } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
-import logoImage from '../../assets/images/logo.png'
+import logoImage from '../../assets/images/remove_bg_logo.png'
 import { navLinks } from './content'
 import { resolveSectionHref, useHomeHref, useSectionHref } from './siteNavigation'
-import { easeOut, ThemeToggle } from './shared'
-import type { Theme } from './types'
+import { easeOut } from './shared'
 
 type HeaderProps = {
   menuOpen: boolean
   scrolled: boolean
-  theme: Theme
   onMenuToggle: () => void
   onMenuClose: () => void
-  onThemeToggle: () => void
 }
 
 const primaryHashes = ['#about', '#capabilities', '#global-reach']
 
-export function Header({
-  menuOpen,
-  scrolled,
-  theme,
-  onMenuToggle,
-  onMenuClose,
-  onThemeToggle,
-}: HeaderProps) {
+export function Header({ menuOpen, scrolled, onMenuToggle, onMenuClose }: HeaderProps) {
   const { t } = useTranslation()
   const { pathname, hash } = useLocation()
   const [desktopMenuOpen, setDesktopMenuOpen] = useState(false)
@@ -50,10 +40,7 @@ export function Header({
     () => desktopNavLinks.filter((link) => !primaryHashes.includes(link.href)),
     [desktopNavLinks],
   )
-  const mobileNavLinks = useMemo(
-    () => [homeNavLink, ...desktopNavLinks],
-    [desktopNavLinks, homeNavLink],
-  )
+  const mobileNavLinks = useMemo(() => [homeNavLink, ...desktopNavLinks], [desktopNavLinks, homeNavLink])
 
   const isHomePage = pathname === '/'
   const isLinkActive = (href: string) => {
@@ -74,19 +61,17 @@ export function Header({
 
   return (
     <motion.header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'border-b border-[var(--header-border)] bg-[var(--header-surface)]/92 backdrop-blur-xl'
-          : 'bg-transparent'
+      className={`fixed inset-x-0 top-0 z-50 border-b border-[var(--header-border)] bg-[var(--header-surface)] backdrop-blur-xl transition-all duration-300 ${
+        scrolled ? 'shadow-[0_10px_30px_rgba(23,33,58,0.08)]' : ''
       }`}
     >
-      <div className="mx-auto flex w-full max-w-[1380px] items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-[1380px] items-center justify-between gap-4 px-4 py-2 sm:px-6 lg:px-8">
         <a href={homeHref} className="flex shrink-0 items-center">
-          <img src={logoImage} alt="Sentinel Medical Solutions" className="h-14 w-auto object-contain" />
+          <img src={logoImage} alt="Sentinel Medical Solutions" className="h-14 w-auto object-contain sm:h-16" />
         </a>
 
         <div className="hidden min-w-0 flex-1 items-center justify-center xl:flex">
-          <div className="flex items-center gap-3 rounded-full border border-[var(--header-border)] bg-[color:color-mix(in_srgb,var(--header-surface)_84%,transparent)] px-4 py-2 shadow-[0_18px_38px_rgba(14,27,42,0.1)] backdrop-blur-xl">
+          <div className="flex items-center gap-5">
             {primaryNavLinks.map((link) => {
               const active = isLinkActive(link.href)
 
@@ -94,7 +79,7 @@ export function Header({
                 <a
                   key={link.label}
                   href={resolveSectionHref(pathname, link.href)}
-                  className={`group inline-flex items-center gap-2 px-3 py-2 text-[0.95rem] font-medium tracking-[-0.01em] transition-all duration-200 ${
+                  className={`group inline-flex items-center gap-2 py-1.5 text-[0.95rem] font-medium tracking-[-0.01em] transition-all duration-200 ${
                     active
                       ? 'text-[var(--accent)]'
                       : 'text-[var(--text-soft)] hover:-translate-y-0.5 hover:text-[var(--text-strong)]'
@@ -124,7 +109,7 @@ export function Header({
               <button
                 type="button"
                 aria-expanded={desktopMenuOpen}
-                className={`group inline-flex items-center gap-2 px-3 py-2 text-[0.95rem] font-medium tracking-[-0.01em] transition-all duration-200 ${
+                className={`group inline-flex items-center gap-2 py-1.5 text-[0.95rem] font-medium tracking-[-0.01em] transition-all duration-200 ${
                   isMoreActive || desktopMenuOpen
                     ? 'text-[var(--accent)]'
                     : 'text-[var(--text-soft)] hover:-translate-y-0.5 hover:text-[var(--text-strong)]'
@@ -136,9 +121,7 @@ export function Header({
                   <span className="inline-block size-1.5 rounded-full bg-transparent transition-colors duration-200 group-hover:bg-[var(--accent-soft)]" />
                 )}
                 <span>More</span>
-                <ChevronDown
-                  className={`size-4 transition-transform duration-200 ${desktopMenuOpen ? 'rotate-180' : ''}`}
-                />
+                <ChevronDown className={`size-4 transition-transform duration-200 ${desktopMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
               <AnimatePresence>
@@ -150,7 +133,7 @@ export function Header({
                     transition={{ duration: 0.18, ease: easeOut }}
                     className="absolute left-1/2 top-full z-50 w-[360px] -translate-x-1/2 pt-5"
                   >
-                    <div className="rounded-[1.2rem] border border-[var(--header-border)] bg-[color:color-mix(in_srgb,var(--card-bg)_88%,transparent)] p-3 shadow-[0_22px_52px_rgba(14,27,42,0.14)] backdrop-blur-2xl">
+                    <div className="rounded-[1.2rem] border border-[var(--header-border)] bg-[color:color-mix(in_srgb,var(--card-bg)_88%,transparent)] p-3 shadow-[0_22px_52px_rgba(23,33,58,0.14)] backdrop-blur-2xl">
                       <div className="grid gap-1">
                         {secondaryNavLinks.map((link) => {
                           const active = isLinkActive(link.href)
@@ -187,17 +170,15 @@ export function Header({
         </div>
 
         <div className="hidden shrink-0 items-center gap-2 xl:flex">
-          <ThemeToggle theme={theme} onToggle={onThemeToggle} />
           <a
             href={contactHref}
-            className="inline-flex items-center whitespace-nowrap rounded-full border border-[var(--accent)] bg-[var(--accent)] px-4.5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--accent-strong)] hover:bg-[var(--accent-strong)] hover:shadow-[0_14px_28px_rgba(23,88,110,0.18)]"
+            className="inline-flex items-center whitespace-nowrap rounded-full border border-[var(--accent)] bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--accent-strong)] hover:bg-[var(--accent-strong)] hover:shadow-[0_14px_28px_rgba(241,90,42,0.22)]"
           >
             {t('header.cta')}
           </a>
         </div>
 
         <div className="flex shrink-0 items-center gap-1.5 xl:hidden">
-          <ThemeToggle theme={theme} onToggle={onThemeToggle} />
           <button
             type="button"
             aria-label={menuOpen ? t('header.closeMenu') : t('header.openMenu')}

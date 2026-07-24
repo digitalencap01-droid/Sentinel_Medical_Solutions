@@ -1,8 +1,6 @@
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
 
-export type Theme = 'light' | 'dark'
-
 export type RevealProps = {
   children: ReactNode
   className?: string
@@ -52,7 +50,6 @@ export type AdvisoryBoardMember = {
 export type Client = {
   name: string
   logoUrl: string
-  /** Relationship language must be approved by the client — do not populate without sign-off. */
   relationshipDescriptor?: string
 }
 

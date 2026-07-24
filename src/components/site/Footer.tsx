@@ -1,7 +1,7 @@
 import { ArrowUp, Mail, MapPinned } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
-import logoImage from '../../assets/images/logo.png'
+import logoImage from '../../assets/images/remove_bg_logo.png'
 import { navLinks } from './content'
 import { resolveSectionHref, useSectionHref } from './siteNavigation'
 
@@ -36,7 +36,7 @@ export function Footer({ year }: { year: number }) {
               <img
                 src={logoImage}
                 alt="Sentinel Medical Solutions"
-                className="h-12 w-auto object-contain sm:h-14"
+                className="h-16 w-auto object-contain sm:h-20"
               />
             </div>
             <p className="mt-5 max-w-xs text-sm leading-7 text-[var(--footer-muted)]">
