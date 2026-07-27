@@ -3,11 +3,14 @@ import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import logoImage from '../../assets/images/remove_bg_logo.png'
 import { navLinks } from './content'
-import { resolveSectionHref, useSectionHref } from './siteNavigation'
+import { resolveSectionHref, useHomeHref, useSectionHref } from './siteNavigation'
 
-const companyLinks = navLinks.filter((link) =>
-  ['#about', '#leadership', '#advisory-board', '#clients'].includes(link.href),
-)
+const companyLinks = [
+  { label: 'Home', href: '#top' },
+  ...navLinks.filter((link) =>
+    ['#about', '#impact', '#strength', '#leadership', '#advisory-board', '#clients'].includes(link.href),
+  ),
+]
 const platformLinks = [
   ...navLinks.filter((link) =>
     ['#capabilities', '#global-reach', '#operations', '#partnerships', '#supply'].includes(link.href),
@@ -19,6 +22,7 @@ const presence = ['UAE', 'India', 'Africa']
 export function Footer({ year }: { year: number }) {
   const { t } = useTranslation()
   const { pathname } = useLocation()
+  const homeHref = useHomeHref()
   const contactHref = useSectionHref('#contact')
 
   return (
@@ -30,9 +34,9 @@ export function Footer({ year }: { year: number }) {
       </div>
 
       <div className="relative mx-auto max-w-6xl px-6 py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
-          <div>
-            <div className="inline-flex">
+        <div className="grid items-start gap-12 text-left lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
+          <div className="justify-self-start">
+            <div>
               <img
                 src={logoImage}
                 alt="Sentinel Medical Solutions"
@@ -48,7 +52,7 @@ export function Footer({ year }: { year: number }) {
             </div>
           </div>
 
-          <div>
+          <div className="justify-self-start">
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[var(--footer-accent)]">
               {t('footer.companyHeading')}
             </p>
@@ -56,8 +60,8 @@ export function Footer({ year }: { year: number }) {
               {companyLinks.map((link) => (
                 <a
                   key={link.label}
-                  href={resolveSectionHref(pathname, link.href)}
-                  className="w-fit transition-all duration-200 hover:translate-x-1 hover:text-[var(--footer-text)]"
+                  href={link.href === '#top' ? homeHref : resolveSectionHref(pathname, link.href)}
+                  className="transition-all duration-200 hover:translate-x-1 hover:text-[var(--footer-text)]"
                 >
                   {link.label}
                 </a>
@@ -65,7 +69,7 @@ export function Footer({ year }: { year: number }) {
             </div>
           </div>
 
-          <div>
+          <div className="justify-self-start">
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[var(--footer-accent)]">
               {t('footer.platformHeading')}
             </p>
@@ -74,7 +78,7 @@ export function Footer({ year }: { year: number }) {
                 <a
                   key={link.label}
                   href={resolveSectionHref(pathname, link.href)}
-                  className="w-fit transition-all duration-200 hover:translate-x-1 hover:text-[var(--footer-text)]"
+                  className="transition-all duration-200 hover:translate-x-1 hover:text-[var(--footer-text)]"
                 >
                   {link.label}
                 </a>
@@ -82,27 +86,27 @@ export function Footer({ year }: { year: number }) {
             </div>
           </div>
 
-          <div>
+          <div className="justify-self-start">
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[var(--footer-accent)]">
               {t('footer.contactHeading')}
             </p>
             <a
               href="mailto:info@sentinelmedical.com"
-              className="mt-5 inline-flex items-center gap-2 font-mono text-sm text-[var(--footer-muted)] transition-colors hover:text-[var(--footer-text)]"
+              className="mt-5 flex items-center gap-2 font-mono text-sm text-[var(--footer-muted)] transition-colors hover:text-[var(--footer-text)]"
             >
               <Mail className="size-3.5 text-[var(--footer-accent)]" />
               info@sentinelmedical.com
             </a>
             <a
               href={contactHref}
-              className="mt-5 inline-flex w-fit items-center gap-2 rounded-full border border-[var(--footer-border)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--footer-text)] transition-all duration-200 hover:border-[var(--footer-accent)] hover:bg-white/40"
+              className="mt-5 inline-flex items-center gap-2 self-start rounded-full border border-[var(--footer-border)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--footer-text)] transition-all duration-200 hover:border-[var(--footer-accent)] hover:bg-white/40"
             >
               {t('footer.ctaPartnership')}
             </a>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-[var(--footer-border)] pt-6 text-sm text-[var(--footer-copy)] sm:flex-row">
+        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-[var(--footer-border)] pt-6 text-left text-sm text-[var(--footer-copy)] sm:flex-row sm:items-center">
           <span>{t('footer.copyright', { year })}</span>
           <a
             href="#top"

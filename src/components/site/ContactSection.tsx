@@ -8,7 +8,7 @@ import { z } from 'zod'
 import { enquiryTypes, regionalOffices } from './content'
 import { getDetailPath, officeDetailIds } from './detailContent'
 import { trackEvent } from '../../lib/analytics'
-import { emphasisSection, Reveal, SectionIntro } from './shared'
+import { Reveal, SectionIntro } from './shared'
 
 // NOTE (i18n scaffold, brief 3.3): validation messages below are hardcoded English —
 // the schema is a module-level constant so it can't call the useTranslation() hook.
@@ -27,7 +27,7 @@ const enquirySchema = z.object({
 type EnquiryFormValues = z.infer<typeof enquirySchema>
 
 const inputClasses =
-  'w-full rounded-xl border border-[var(--emphasis-card-border)] bg-[var(--emphasis-card-bg)] px-4 py-3 text-sm text-[var(--emphasis-text)] placeholder:text-[var(--emphasis-muted)] outline-none transition-colors focus:border-[var(--emphasis-accent)] focus-visible:ring-2 focus-visible:ring-[var(--emphasis-accent-soft)]'
+  'w-full rounded-xl border border-[var(--card-border)] bg-white px-4 py-3 text-sm text-[var(--text-strong)] placeholder:text-[var(--muted)] outline-none transition-colors focus:border-[var(--accent)] focus-visible:ring-2 focus-visible:ring-[var(--accent-soft)]'
 
 export function ContactSection() {
   const { t } = useTranslation()
@@ -51,13 +51,15 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className={`${emphasisSection} py-24`}>
+    <section
+      id="contact"
+      className="bg-[var(--surface)] py-24 text-[var(--text)] [background-image:radial-gradient(circle_at_top_right,rgba(241,90,42,0.12),transparent_26%),linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.96))]"
+    >
       <div className="mx-auto max-w-6xl px-6">
         <SectionIntro
           eyebrow="Partner With Sentinel"
           title="Let's Build Dependable Healthcare Supply Together."
           body="Whether you're a manufacturer seeking UAE and regional market access, or an institutional buyer that needs reliable supply, Sentinel Medical Solutions is ready to execute."
-          invert
         />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
@@ -65,13 +67,13 @@ export function ContactSection() {
             <form
               onSubmit={handleSubmit(onSubmit)}
               noValidate
-              className="rounded-[1.75rem] border border-[var(--emphasis-card-border)] bg-[var(--emphasis-card-bg)] p-6 text-left backdrop-blur-sm md:p-8"
+              className="rounded-[1.75rem] border border-[var(--card-border)] bg-white p-6 text-left shadow-[0_18px_40px_rgba(23,33,58,0.08)] md:p-8"
             >
               {isSubmitSuccessful ? (
                 <div className="flex flex-col items-center gap-3 py-10 text-center">
-                  <CheckCircle2 className="size-10 text-[var(--emphasis-accent)]" aria-hidden="true" />
-                  <p className="text-lg font-semibold text-[var(--emphasis-text)]">{t('contactForm.thanksTitle')}</p>
-                  <p className="max-w-sm text-sm leading-6 text-[var(--emphasis-muted)]">
+                  <CheckCircle2 className="size-10 text-[var(--accent)]" aria-hidden="true" />
+                  <p className="text-lg font-semibold text-[var(--text-strong)]">{t('contactForm.thanksTitle')}</p>
+                  <p className="max-w-sm text-sm leading-6 text-[var(--muted)]">
                     {t('contactForm.thanksBody')}
                   </p>
                 </div>
@@ -79,14 +81,14 @@ export function ContactSection() {
                 <div className="grid gap-5">
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <label htmlFor="contact-name" className="mb-1.5 block font-mono text-xs font-medium uppercase tracking-[0.12em] text-[var(--emphasis-muted)]">
+                      <label htmlFor="contact-name" className="mb-1.5 block font-mono text-xs font-medium uppercase tracking-[0.12em] text-[var(--text-soft)]">
                         {t('contactForm.fullName')}
                       </label>
                       <input id="contact-name" type="text" autoComplete="name" className={inputClasses} {...register('name')} />
                       {errors.name && <p className="mt-1.5 text-xs text-red-400">{errors.name.message}</p>}
                     </div>
                     <div>
-                      <label htmlFor="contact-org" className="mb-1.5 block font-mono text-xs font-medium uppercase tracking-[0.12em] text-[var(--emphasis-muted)]">
+                      <label htmlFor="contact-org" className="mb-1.5 block font-mono text-xs font-medium uppercase tracking-[0.12em] text-[var(--text-soft)]">
                         {t('contactForm.organisation')}
                       </label>
                       <input id="contact-org" type="text" autoComplete="organization" className={inputClasses} {...register('organisation')} />
@@ -96,14 +98,14 @@ export function ContactSection() {
 
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <label htmlFor="contact-email" className="mb-1.5 block font-mono text-xs font-medium uppercase tracking-[0.12em] text-[var(--emphasis-muted)]">
+                      <label htmlFor="contact-email" className="mb-1.5 block font-mono text-xs font-medium uppercase tracking-[0.12em] text-[var(--text-soft)]">
                         {t('contactForm.email')}
                       </label>
                       <input id="contact-email" type="email" autoComplete="email" className={inputClasses} {...register('email')} />
                       {errors.email && <p className="mt-1.5 text-xs text-red-400">{errors.email.message}</p>}
                     </div>
                     <div>
-                      <label htmlFor="contact-enquiry-type" className="mb-1.5 block font-mono text-xs font-medium uppercase tracking-[0.12em] text-[var(--emphasis-muted)]">
+                      <label htmlFor="contact-enquiry-type" className="mb-1.5 block font-mono text-xs font-medium uppercase tracking-[0.12em] text-[var(--text-soft)]">
                         {t('contactForm.enquiryType')}
                       </label>
                       <select id="contact-enquiry-type" defaultValue="" className={inputClasses} {...register('enquiryType')}>
@@ -121,7 +123,7 @@ export function ContactSection() {
                   </div>
 
                   <div>
-                    <label htmlFor="contact-message" className="mb-1.5 block font-mono text-xs font-medium uppercase tracking-[0.12em] text-[var(--emphasis-muted)]">
+                    <label htmlFor="contact-message" className="mb-1.5 block font-mono text-xs font-medium uppercase tracking-[0.12em] text-[var(--text-soft)]">
                       {t('contactForm.message')}
                     </label>
                     <textarea id="contact-message" rows={4} className={inputClasses} {...register('message')} />
@@ -131,7 +133,7 @@ export function ContactSection() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="mt-2 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[var(--emphasis-button-bg)] px-7 py-4 text-sm font-semibold text-[var(--emphasis-button-text)] transition-transform duration-200 hover:scale-[1.02] disabled:opacity-60"
+                    className="mt-2 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[var(--accent)] px-7 py-4 text-sm font-semibold text-white transition-transform duration-200 hover:scale-[1.02] hover:bg-[var(--accent-strong)] disabled:opacity-60"
                   >
                     {isSubmitting ? t('contactForm.sending') : t('contactForm.send')}
                     <ChevronRight className="size-4" />
@@ -143,8 +145,8 @@ export function ContactSection() {
 
           <Reveal delay={0.1}>
             <div className="flex h-full flex-col gap-5">
-              <div className="rounded-[1.75rem] border border-[var(--emphasis-card-border)] bg-[var(--emphasis-card-bg)] p-6 backdrop-blur-sm md:p-7">
-                <p className="font-mono text-xs font-medium uppercase tracking-[0.24em] text-[var(--emphasis-accent)]">
+              <div className="rounded-[1.75rem] border border-[var(--card-border)] bg-white p-6 shadow-[0_18px_40px_rgba(23,33,58,0.08)] md:p-7">
+                <p className="font-mono text-xs font-medium uppercase tracking-[0.24em] text-[var(--accent)]">
                   Regional Offices
                 </p>
                 <div className="mt-5 grid gap-4">
@@ -152,22 +154,22 @@ export function ContactSection() {
                     <Link
                       key={office.region}
                       to={getDetailPath(officeDetailIds[index])}
-                      className="block border-b border-[var(--emphasis-card-border)] pb-4 last:border-b-0 last:pb-0"
+                      className="block border-b border-[var(--divider)] pb-4 last:border-b-0 last:pb-0"
                     >
                       <div className="flex items-center gap-2">
-                        <MapPinned className="size-3.5 text-[var(--emphasis-accent)]" aria-hidden="true" />
-                        <span className="text-sm font-semibold text-[var(--emphasis-text)]">{office.region}</span>
+                        <MapPinned className="size-3.5 text-[var(--accent)]" aria-hidden="true" />
+                        <span className="text-sm font-semibold text-[var(--text-strong)]">{office.region}</span>
                         {office.isHQ && (
-                          <span className="rounded-full bg-[var(--emphasis-accent)] px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-[0.12em] text-white">
+                          <span className="rounded-full bg-[var(--accent)] px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-[0.12em] text-white">
                             HQ
                           </span>
                         )}
                       </div>
-                      <p className="mt-1.5 text-sm leading-6 text-[var(--emphasis-muted)]">{office.addressLine}</p>
+                      <p className="mt-1.5 text-sm leading-6 text-[var(--muted)]">{office.addressLine}</p>
                     </Link>
                   ))}
                 </div>
-                <p className="mt-2 text-[0.68rem] leading-5 text-[var(--emphasis-muted)] opacity-70">
+                <p className="mt-2 text-[0.68rem] leading-5 text-[var(--muted)]">
                   ⚠️ Address details above are placeholders pending confirmation from Sentinel.
                 </p>
               </div>
@@ -175,15 +177,15 @@ export function ContactSection() {
               <motion.a
                 href="mailto:info@sentinelmedical.com"
                 whileHover={{ y: -4 }}
-                className="flex items-center justify-between rounded-[1.75rem] border border-[var(--emphasis-card-border)] bg-[var(--emphasis-card-bg)] p-6 backdrop-blur-sm transition-colors hover:border-[var(--emphasis-accent)]"
+                className="flex items-center justify-between rounded-[1.75rem] border border-[var(--card-border)] bg-white p-6 shadow-[0_18px_40px_rgba(23,33,58,0.08)] transition-colors hover:border-[var(--accent)]"
               >
                 <div>
-                  <p className="font-mono text-xs font-medium uppercase tracking-[0.24em] text-[var(--emphasis-accent)]">
+                  <p className="font-mono text-xs font-medium uppercase tracking-[0.24em] text-[var(--accent)]">
                     Direct Email
                   </p>
-                  <p className="mt-2 font-mono text-sm text-[var(--emphasis-text)]">info@sentinelmedical.com</p>
+                  <p className="mt-2 font-mono text-sm text-[var(--text-strong)]">info@sentinelmedical.com</p>
                 </div>
-                <Mail className="size-5 text-[var(--emphasis-accent)]" aria-hidden="true" />
+                <Mail className="size-5 text-[var(--accent)]" aria-hidden="true" />
               </motion.a>
             </div>
           </Reveal>
