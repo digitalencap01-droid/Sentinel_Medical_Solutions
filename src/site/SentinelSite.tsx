@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import finalLogo from '../assets/images/final.png'
+import logoImage from '../assets/images/logoo.png'
 import { images, pages, type SitePageData, type SiteSection } from './siteData'
 
 const capabilityLinks = [
@@ -54,7 +54,7 @@ function SiteLink({
 function Brand() {
   return (
     <SiteLink className="brand" href="/" ariaLabel="Sentinel home">
-      <img className="brand-logo" src={finalLogo} alt="Sentinel" />
+      <img className="brand-logo" src={logoImage} alt="Sentinel" />
     </SiteLink>
   )
 }
