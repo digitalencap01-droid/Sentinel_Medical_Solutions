@@ -1,0 +1,30 @@
+SENTINEL GLOBAL WEBSITE — PACKAGE QA REPORT
+Prepared: 13 August 2026
+
+Source snapshot: 20aa682722899843b71f38889a0f47d15b50e15e
+Live URL: https://sentinel-global-website.ravinder-sharmain.chatgpt.site
+
+Package-specific portability work:
+- Downloaded and bundled 11 externally hosted stock images.
+- Replaced all external image references in the packaged application with local paths.
+- Retained the live site's content, design, navigation and responsive rules.
+- Made no change to the live website.
+
+Validation completed:
+- Production build: PASS
+- Worker artifact validation: PASS
+- Rendered metadata test: PASS
+- Local preview title and homepage H1: PASS
+- Homepage broken-image check: PASS (0 broken images)
+- External image reference scan: PASS (no external image hotlinks remain in application content or CSS)
+
+Package counts:
+- Public files: 42
+- Image/media files under public/images: 38
+- Public routes: 17
+
+Known launch blockers:
+- Contact form is a prototype and is not connected to email, CRM or a database.
+- Privacy and terms content requires final legal review.
+- Image licensing records must be retained separately by the owner.
+

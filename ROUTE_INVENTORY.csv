@@ -1,0 +1,19 @@
+Route,Page,Primary content source,Status
+/,Home,app/site.tsx,Included
+/who-we-are,Who We Are,app/site-data.ts,Included
+/capabilities,Capabilities Overview,app/site-data.ts,Included
+/capabilities/global-sourcing,Global Sourcing,app/site-data.ts,Included
+/capabilities/market-access,Regulatory and Market Access,app/site-data.ts,Included
+/capabilities/distribution,Distribution and Supply Coordination,app/site-data.ts,Included
+/capabilities/commercial-activation,Commercial and Clinical Activation,app/site-data.ts,Included
+/what-we-supply,What We Supply,app/site-data.ts,Included
+/who-we-serve,Who We Serve,app/site.tsx and app/site-data.ts,Included
+/global-reach,Global Reach,app/site-data.ts,Included
+/how-we-work,How We Work,app/site-data.ts,Included
+/partnerships,Partnerships,app/site-data.ts,Included
+/leadership,Leadership,app/site.tsx and app/site-data.ts,Included
+/insights,Insights,app/site-data.ts,Included
+/contact,Contact,app/site.tsx,Included — prototype form requires connection
+/privacy,Privacy,app/site.tsx,Included — legal review required
+/terms,Terms,app/site.tsx,Included — legal review required
+
