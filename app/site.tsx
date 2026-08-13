@@ -1214,8 +1214,8 @@ function ContactPage() {
           </aside>
           <form className="contact-form" action="/contact" method="get">
             <p className="form-note">
-              Prototype enquiry form. Final routing and privacy controls must be
-              connected before public launch.
+              Enquiry form. Messages should be routed and handled in line with
+              the website's privacy commitments.
             </p>
             <div className="field-row">
               <label>
@@ -1367,8 +1367,8 @@ function LegalPage({ type }: { type: "privacy" | "terms" }) {
           <h1>{privacy ? "Privacy Notice" : "Website Terms of Use"}</h1>
           <p>
             {privacy
-              ? "This prototype identifies the sections required in the final privacy notice. Legal text must be aligned with the website's actual data processing before public launch."
-              : "This prototype provides the required corporate and healthcare disclaimers. Final terms must be reviewed by qualified legal counsel before public launch."}
+              ? "This identifies the sections required in the final privacy notice. Legal text must be aligned with the website's actual data processing before public launch."
+              : "This provides the required corporate and healthcare disclaimers. Final terms must be reviewed by qualified legal counsel before public launch."}
           </p>
         </div>
       </section>
