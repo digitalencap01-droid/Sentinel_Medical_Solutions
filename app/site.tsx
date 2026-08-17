@@ -625,43 +625,34 @@ function HomePage() {
             </p>
           </div>
           <div className="audience-grid">
-            <a href="/who-we-serve#manufacturers" className="audience-card audience-one">
+            <div className="audience-card audience-one">
               <span className="audience-label">For manufacturers</span>
-              <span className="audience-location">UAE global trade gateway</span>
               <h3>Enter and develop priority markets.</h3>
               <p>
                 Build a practical route through assessment, access, channel
                 design, institutional engagement and launch execution.
               </p>
-              <strong>
-                Explore the pathway <Arrow />
-              </strong>
-            </a>
-            <a href="/who-we-serve#providers" className="audience-card audience-two">
+            </div>
+            <div className="audience-card audience-two">
               <span className="audience-label">For providers</span>
-              <span className="audience-location">Abu Dhabi care setting · UAE</span>
               <h3>Strengthen supply and access.</h3>
               <p>
                 Source qualified pharmaceuticals, consumables, devices,
                 diagnostics and clinical solutions through structured pathways.
               </p>
-              <strong>
-                Explore the pathway <Arrow />
-              </strong>
-            </a>
-            <a href="/who-we-serve#institutions" className="audience-card audience-three">
+            </div>
+            <div className="audience-card audience-three">
               <span className="audience-label">For institutions</span>
-              <span className="audience-location">Healthcare decision-making · UAE</span>
               <h3>Coordinate complex requirements.</h3>
               <p>
                 Bring product selection, procurement, supplier governance and
                 market-specific fulfilment into one accountable view.
               </p>
-              <strong>
-                Explore the pathway <Arrow />
-              </strong>
-            </a>
+            </div>
           </div>
+          <a href="/contact" className="button audience-cta">
+            Explore the pathway <Arrow />
+          </a>
         </div>
       </section>
 
@@ -1292,6 +1283,22 @@ const leadershipProfiles = [
   },
 ];
 
+const advisoryBoardSeats = [
+  { name: "Advisory Board — Seat 01" },
+  { name: "Advisory Board — Seat 02" },
+  { name: "Advisory Board — Seat 03" },
+  { name: "Advisory Board — Seat 04" },
+];
+
+function PersonPlaceholderIcon() {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <circle cx="16" cy="12" r="6" />
+      <path d="M5 27c1.5-6.5 7-9 11-9s9.5 2.5 11 9" />
+    </svg>
+  );
+}
+
 function LeadershipPage() {
   return (
     <>
@@ -1330,18 +1337,58 @@ function LeadershipPage() {
               beginning.
             </p>
           </div>
-          <div className="leadership-profile-grid">
-            {leadershipProfiles.map((profile) => (
-              <article className="leadership-profile" key={profile.name}>
-                <figure>
-                  <img src={profile.image} alt={profile.name} />
-                </figure>
-                <div>
-                  <h3>{profile.name}</h3>
-                  <p>{profile.bio}</p>
-                </div>
-              </article>
-            ))}
+          <div className="roster-toggle">
+            <input
+              type="radio"
+              name="roster-view"
+              id="roster-tab-leadership"
+              className="sr-only roster-toggle-input"
+              defaultChecked
+            />
+            <input
+              type="radio"
+              name="roster-view"
+              id="roster-tab-advisory"
+              className="sr-only roster-toggle-input"
+            />
+            <div className="roster-toggle-tabs">
+              <label htmlFor="roster-tab-leadership" className="roster-toggle-tab">
+                Leadership
+              </label>
+              <label htmlFor="roster-tab-advisory" className="roster-toggle-tab">
+                Advisory Board
+              </label>
+            </div>
+            <div className="roster-panel roster-panel-leadership">
+              <div className="leadership-profile-grid">
+                {leadershipProfiles.map((profile) => (
+                  <article className="leadership-profile" key={profile.name}>
+                    <figure>
+                      <img src={profile.image} alt={profile.name} />
+                    </figure>
+                    <div>
+                      <h3>{profile.name}</h3>
+                      <p>{profile.bio}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div className="roster-panel roster-panel-advisory">
+              <div className="leadership-profile-grid">
+                {advisoryBoardSeats.map((seat) => (
+                  <article className="leadership-profile leadership-profile-placeholder" key={seat.name}>
+                    <figure className="leadership-avatar-placeholder">
+                      <PersonPlaceholderIcon />
+                    </figure>
+                    <div>
+                      <h3>{seat.name}</h3>
+                      <p>Advisory board appointment to be announced.</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

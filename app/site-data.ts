@@ -255,7 +255,7 @@ export const pages: Record<string, SitePageData> = {
       "We identify supply options around the required quality, regulatory pathway, economics, capacity and continuity profile—not around a predetermined country or catalogue.",
     image: "/images/global-sourcing-hero.png",
     imageAlt:
-      "A connected global healthcare supply chain spanning manufacturers, logistics, regulation, distribution, healthcare providers and patient access.",
+      "Stacked shipping containers in a logistics yard, with a reach stacker moving a container between the rows.",
     sections: [
       {
         eyebrow: "Requirement-led sourcing",
@@ -716,7 +716,7 @@ export const pages: Record<string, SitePageData> = {
     heroCtaLabel: "Explore a market opportunity",
     image: "/images/global-reach-cargo-ship.png",
     imageAlt:
-      "A container ship crossing open water, representing international healthcare supply and connected routes to market.",
+      "Coloured pushpins marking multiple locations on a world map, representing Sentinel's connected international healthcare routes.",
     showImageCaption: false,
     sections: [
       {
