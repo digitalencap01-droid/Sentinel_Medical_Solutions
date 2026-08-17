@@ -2650,6 +2650,10 @@ a:hover .arrow.diagonal {
   line-height: 1.75;
 }
 
+.legal-grid p + p {
+  margin-top: 14px;
+}
+
 .footer {
   padding: 90px 0 30px;
   background: #17213a;

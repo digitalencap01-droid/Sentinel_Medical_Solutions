@@ -1411,58 +1411,300 @@ function LegalPage({ type }: { type: "privacy" | "terms" }) {
           <h1>{privacy ? "Privacy Notice" : "Website Terms of Use"}</h1>
           <p>
             {privacy
-              ? "This identifies the sections required in the final privacy notice. Legal text must be aligned with the website's actual data processing before public launch."
-              : "This provides the required corporate and healthcare disclaimers. Final terms must be reviewed by qualified legal counsel before public launch."}
+              ? "This notice explains what information Sentinel Medical Solutions LLC collects through this website, why, and the choices you have."
+              : "These terms govern your use of this website. By browsing sentinelmedical.com or submitting an enquiry, you agree to them."}
           </p>
         </div>
       </section>
       <section className="legal-section">
         <div className="shell legal-grid">
-          <aside>Last reviewed: 27 July 2026</aside>
+          <aside>Last updated: 17 August 2026</aside>
           <div>
             {privacy ? (
               <>
-                <h2>Information we may collect</h2>
+                <h2>1. Introduction</h2>
                 <p>
-                  Information submitted through business enquiries may include
-                  name, organisation, professional contact details, country and
-                  information about the relevant product, market or opportunity.
+                  Sentinel Medical Solutions LLC, a company headquartered in
+                  the United Arab Emirates (&quot;Sentinel,&quot;
+                  &quot;we,&quot; &quot;our&quot; or &quot;us&quot;),
+                  operates the website located at sentinelmedical.com (the
+                  &quot;Site&quot;). This Privacy Notice describes the
+                  personal data we collect through the Site, the purposes for
+                  which it is used, and the rights available to you in
+                  respect of it.
                 </p>
-                <h2>How information may be used</h2>
+
+                <h2>2. Personal Data We Collect</h2>
                 <p>
-                  Information may be used to respond to an enquiry, evaluate a
-                  potential business relationship, meet legal obligations and
-                  protect the security and integrity of our communications.
+                  Where you submit an enquiry through the contact form on
+                  the Site, we collect the personal data you enter into that
+                  form, namely: (a) full name; (b) organisation; (c) business
+                  email address; (d) country or region; (e) the subject
+                  matter of the enquiry; and (f) any further detail you
+                  choose to include in the accompanying message. Where you
+                  correspond with us directly at info@sentinelmedical.com, we
+                  collect the personal data contained in that correspondence.
                 </p>
-                <h2>Final notice required</h2>
                 <p>
-                  The final notice must address the legal basis for processing,
-                  service providers, international transfers, retention,
-                  individual rights, security, analytics and cookies according
-                  to the site&apos;s final technical setup.
+                  Separately, our hosting infrastructure records limited
+                  technical data whenever the Site is accessed, including the
+                  visitor&apos;s IP address, browser type, device type, the
+                  pages requested and the date and time of the request. This
+                  data is used solely to operate, maintain and secure the
+                  Site. The Site does not, as at the date of this Notice,
+                  deploy analytics, advertising or marketing cookies, or any
+                  other non-essential tracking technology. Should this
+                  change, this Notice will be revised and, where required by
+                  applicable law, consent will be obtained beforehand.
+                </p>
+
+                <h2>3. Purposes of Processing</h2>
+                <p>
+                  Personal data collected through the Site is processed to:
+                  (a) respond to and manage enquiries; (b) evaluate
+                  prospective sourcing, distribution, market-access or
+                  partnership opportunities; (c) maintain records of business
+                  correspondence; (d) comply with applicable legal and
+                  regulatory obligations; and (e) safeguard the security and
+                  integrity of the Site and Sentinel&apos;s systems.
+                </p>
+
+                <h2>4. Legal Basis for Processing</h2>
+                <p>
+                  To the extent United Arab Emirates Federal Decree-Law No.
+                  45 of 2021 on the Protection of Personal Data, the EU
+                  General Data Protection Regulation, or other applicable
+                  data protection law governs our processing of your
+                  personal data, we rely on one or more of the following
+                  legal bases: your consent; our legitimate interest in
+                  responding to enquiries and pursuing commercial
+                  relationships; and, where applicable, compliance with a
+                  legal obligation to which we are subject.
+                </p>
+
+                <h2>5. Disclosure of Personal Data</h2>
+                <p>
+                  Sentinel does not sell personal data. Personal data may be
+                  disclosed to: (a) Sentinel personnel who require it to
+                  respond to or action an enquiry; (b) manufacturers,
+                  distribution partners or institutional counterparties,
+                  solely to the extent relevant to the specific opportunity
+                  raised; (c) third-party service providers engaged to
+                  support our hosting, email and business operations, acting
+                  on our instructions and subject to appropriate
+                  confidentiality obligations; (d) professional advisers,
+                  regulators or courts, where required by law; and (e) a
+                  successor entity in connection with any merger,
+                  acquisition or corporate reorganisation involving
+                  Sentinel.
+                </p>
+
+                <h2>6. International Transfers</h2>
+                <p>
+                  Sentinel&apos;s operations extend across the United Arab
+                  Emirates, the wider GCC, Africa, Europe, India, Southeast
+                  Asia and East Asia. Personal data submitted through the
+                  Site may accordingly be accessed, processed or stored
+                  outside the jurisdiction in which it was originally
+                  provided. Where such transfers occur, Sentinel takes
+                  appropriate measures to ensure the data continues to
+                  benefit from an adequate level of protection.
+                </p>
+
+                <h2>7. Data Retention</h2>
+                <p>
+                  Personal data is retained only for as long as reasonably
+                  necessary to fulfil the purposes set out in Section 3,
+                  including any applicable legal, accounting or
+                  record-keeping requirement, following which it is securely
+                  deleted or anonymised.
+                </p>
+
+                <h2>8. Security</h2>
+                <p>
+                  Sentinel maintains reasonable technical and organisational
+                  measures designed to protect personal data against
+                  unauthorised access, alteration, disclosure or
+                  destruction. No method of electronic transmission or
+                  storage can be guaranteed to be entirely secure, and no
+                  warranty of absolute security is given.
+                </p>
+
+                <h2>9. Your Rights</h2>
+                <p>
+                  Subject to applicable law, you may have the right to: (a)
+                  request access to the personal data Sentinel holds about
+                  you; (b) request correction of inaccurate or incomplete
+                  data; (c) request deletion of your data; (d) object to, or
+                  request restriction of, certain processing; and (e)
+                  withdraw consent at any time where processing is based on
+                  consent, without affecting the lawfulness of processing
+                  carried out before that withdrawal. Requests may be
+                  directed to info@sentinelmedical.com. Sentinel may request
+                  information reasonably necessary to verify your identity
+                  before giving effect to a request.
+                </p>
+
+                <h2>10. Children</h2>
+                <p>
+                  The Site is directed at business professionals and is not
+                  intended for use by children. Sentinel does not knowingly
+                  collect personal data from children.
+                </p>
+
+                <h2>11. Third-Party Links</h2>
+                <p>
+                  The Site may reference or link to third-party websites or
+                  resources. This Notice does not extend to, and Sentinel
+                  accepts no responsibility for, the privacy practices of any
+                  third party.
+                </p>
+
+                <h2>12. Amendments to this Notice</h2>
+                <p>
+                  Sentinel may amend this Notice from time to time to
+                  reflect changes to the Site or to applicable law. The date
+                  of the most recent revision appears above.
+                </p>
+
+                <h2>13. Contact</h2>
+                <p>
+                  Questions regarding this Notice, or requests concerning
+                  personal data, should be directed to
+                  info@sentinelmedical.com.
                 </p>
               </>
             ) : (
               <>
-                <h2>General corporate information</h2>
+                <h2>1. Acceptance of Terms</h2>
                 <p>
-                  Information on this website is provided for general
-                  business-to-business informational purposes. References to
-                  products, services, markets or capabilities do not constitute
-                  an offer and remain subject to regulation, licensing,
-                  registration, availability and formal agreement.
+                  These Terms of Use (the &quot;Terms&quot;) govern access to
+                  and use of the website located at sentinelmedical.com (the
+                  &quot;Site&quot;), operated by Sentinel Medical Solutions
+                  LLC (&quot;Sentinel,&quot; &quot;we,&quot; &quot;our&quot;
+                  or &quot;us&quot;). By accessing the Site or submitting an
+                  enquiry through it, you agree to be bound by these Terms.
+                  If you do not agree to these Terms, you must not use the
+                  Site.
                 </p>
-                <h2>No medical advice</h2>
+
+                <h2>2. Nature of the Site</h2>
                 <p>
-                  Nothing on this website is medical advice, diagnosis or
-                  treatment guidance, or a substitute for consultation with an
+                  The Site is a business-to-business informational resource
+                  describing Sentinel&apos;s healthcare market-access,
+                  sourcing, distribution and commercial-activation
+                  capabilities across the United Arab Emirates, the GCC,
+                  Africa and Sentinel&apos;s wider international sourcing
+                  network. The Site does not offer products for sale, and no
+                  transaction is concluded through it.
+                </p>
+
+                <h2>3. No Offer or Solicitation</h2>
+                <p>
+                  Descriptions of capabilities, portfolio categories, markets
+                  or partnerships appearing on the Site are provided for
+                  general information only and do not constitute an offer,
+                  solicitation or commitment to supply, distribute or
+                  partner with any party. Any engagement with Sentinel is
+                  subject to separate written agreement, due diligence, and
+                  compliance with applicable regulation, licensing,
+                  registration and partner mandates in the relevant
+                  jurisdiction.
+                </p>
+
+                <h2>4. No Medical Advice</h2>
+                <p>
+                  Content on the Site does not constitute medical advice,
+                  diagnosis or treatment guidance and must not be relied
+                  upon as a substitute for consultation with an
                   appropriately qualified healthcare professional.
                 </p>
-                <h2>Final terms required</h2>
+
+                <h2>5. Accuracy and Availability</h2>
                 <p>
-                  Final terms should address permitted use, intellectual
-                  property, third-party links, accuracy, liability, governing
-                  law and jurisdiction after legal review.
+                  While Sentinel seeks to keep the Site accurate and
+                  current, no warranty is given as to the completeness or
+                  accuracy of its content, and Sentinel reserves the right
+                  to amend, suspend or withdraw any part of the Site without
+                  notice. The availability of products, capabilities or
+                  markets referenced on the Site is subject to applicable
+                  regulation, licensing, registration and formal partner
+                  mandates, and may vary by jurisdiction.
+                </p>
+
+                <h2>6. Intellectual Property</h2>
+                <p>
+                  Unless otherwise indicated, all content on the Site,
+                  including text, graphics, logos and trademarks, is owned by
+                  Sentinel or its licensors and is protected under applicable
+                  intellectual property law. You may view and print pages of
+                  the Site for personal or internal business reference only.
+                  No content may be reproduced, republished, distributed or
+                  otherwise exploited for commercial purposes without
+                  Sentinel&apos;s prior written consent.
+                </p>
+
+                <h2>7. Acceptable Use</h2>
+                <p>
+                  You must not: (a) use the Site for any unlawful or
+                  fraudulent purpose; (b) attempt to obtain unauthorised
+                  access to the Site or its underlying systems; (c) scrape,
+                  harvest or systematically extract content from the Site;
+                  (d) interfere with the proper functioning of the Site; or
+                  (e) misrepresent your identity or affiliation in any
+                  communication with Sentinel.
+                </p>
+
+                <h2>8. Enquiries and Submissions</h2>
+                <p>
+                  By submitting an enquiry through the Site, you represent
+                  that the information provided is accurate and that you
+                  are authorised to provide it and to be contacted by
+                  Sentinel in connection with it. Sensitive personal data,
+                  patient information or confidential third-party
+                  information must not be submitted through the Site unless
+                  specifically requested by Sentinel.
+                </p>
+
+                <h2>9. Third-Party Links</h2>
+                <p>
+                  The Site may contain links to third-party websites,
+                  provided for convenience only. Sentinel does not control,
+                  and accepts no responsibility for, the content or
+                  practices of any third-party website, and the inclusion of
+                  a link does not imply endorsement.
+                </p>
+
+                <h2>10. Limitation of Liability</h2>
+                <p>
+                  To the fullest extent permitted by applicable law,
+                  Sentinel excludes all liability for loss or damage of any
+                  kind, including indirect or consequential loss, arising
+                  from access to or use of, or reliance on, the Site or its
+                  content. Nothing in these Terms limits liability that
+                  cannot lawfully be excluded.
+                </p>
+
+                <h2>11. Governing Law and Jurisdiction</h2>
+                <p>
+                  These Terms are governed by the laws of the United Arab
+                  Emirates. The courts of the United Arab Emirates shall
+                  have exclusive jurisdiction over any dispute arising out
+                  of or in connection with these Terms or use of the Site.
+                </p>
+
+                <h2>12. Amendments</h2>
+                <p>
+                  Sentinel may revise these Terms at any time. Continued use
+                  of the Site following any revision constitutes acceptance
+                  of the amended Terms. The date of the most recent revision
+                  appears above.
+                </p>
+
+                <h2>13. Contact</h2>
+                <p>
+                  Questions regarding these Terms should be directed to
+                  info@sentinelmedical.com.
                 </p>
               </>
             )}
