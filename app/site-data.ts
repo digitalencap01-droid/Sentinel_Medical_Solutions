@@ -295,7 +295,7 @@ export const pages: Record<string, SitePageData> = {
           "Global supplier and manufacturer identification",
           "Initial capability and documentation screening",
           "Technical and commercial comparison",
-          "Sample, quotation and dossier coordination",
+          "Quotation and dossier coordination",
           "Capacity, lead-time and continuity assessment",
           "Commercial term and procurement support",
           "Supplier communication and governance",
@@ -1027,7 +1027,7 @@ export const pages: Record<string, SitePageData> = {
         eyebrow: "Editorial note",
         title: "Publish substance, not empty content cards.",
         body: [
-          "The public insights page should launch only when at least two complete, approved articles are available. The prototype shows the proposed editorial direction without fabricating publication dates.",
+          "The public insights page should launch only when at least two complete, approved articles are available. This shows the proposed editorial direction without fabricating publication dates.",
         ],
         tone: "navy",
       },

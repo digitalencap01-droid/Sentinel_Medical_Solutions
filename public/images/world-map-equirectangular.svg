@@ -24,7 +24,7 @@ Example for painting countries:
 
 <g id="positioner" transform="translate(180, 90) scale(1, -1)">
 
-<g id="dummy">
+<g id="map-layer">
 </g>
 
 <g class="country AFG">

@@ -1364,8 +1364,8 @@ function LegalPage({ type }: { type: "privacy" | "terms" }) {
           <h1>{privacy ? "Privacy Notice" : "Website Terms of Use"}</h1>
           <p>
             {privacy
-              ? "This prototype identifies the sections required in the final privacy notice. Legal text must be aligned with the website's actual data processing before public launch."
-              : "This prototype provides the required corporate and healthcare disclaimers. Final terms must be reviewed by qualified legal counsel before public launch."}
+              ? "This identifies the sections required in the final privacy notice. Legal text must be aligned with the website's actual data processing before public launch."
+              : "This provides the required corporate and healthcare disclaimers. Final terms must be reviewed by qualified legal counsel before public launch."}
           </p>
         </div>
       </section>
