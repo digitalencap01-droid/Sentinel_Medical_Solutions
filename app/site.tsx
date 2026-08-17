@@ -21,7 +21,6 @@ const primaryLinks = [
 
 const utilityLinks = [
   { href: "/insights", label: "Insights" },
-  { href: "/insights", label: "Resources" },
   { href: "/leadership", label: "Leadership" },
   { href: "/global-reach", label: "Global Reach" },
   { href: "/contact", label: "Contact" },
@@ -30,7 +29,9 @@ const utilityLinks = [
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return (
     <span aria-hidden="true" className={diagonal ? "arrow diagonal" : "arrow"}>
-      {diagonal ? "↗" : "→"}
+      <svg viewBox="0 0 16 16">
+        <path d="M2 8h11M9 4l4 4-4 4" />
+      </svg>
     </span>
   );
 }
@@ -65,9 +66,6 @@ function Header() {
                 {link.label}
               </a>
             ))}
-            <span className="utility-language">
-              <span aria-hidden="true">◎</span> English <span aria-hidden="true">⌄</span>
-            </span>
           </nav>
         </div>
       </div>
@@ -681,11 +679,14 @@ function HomePage() {
             </p>
           </div>
           <div className="capability-path" aria-label="Sentinel capability pathway">
-            {capabilityCards.map((card) => (
+            {capabilityCards.map((card, index) => (
               <div className="capability-stage" key={card.num}>
                 <div className="capability-node">
-                  <span>{card.num}</span>
+                  <span className="capability-num">{card.num}</span>
                   <strong>{card.stage}</strong>
+                  {index < capabilityCards.length - 1 && (
+                    <span className="capability-connector" aria-hidden="true" />
+                  )}
                 </div>
                 <a href={card.href} className="capability-card">
                   <span className="capability-icon">
@@ -1213,10 +1214,6 @@ function ContactPage() {
             </div>
           </aside>
           <form className="contact-form" action="/contact" method="get">
-            <p className="form-note">
-              Prototype enquiry form. Final routing and privacy controls must be
-              connected before public launch.
-            </p>
             <div className="field-row">
               <label>
                 Full name

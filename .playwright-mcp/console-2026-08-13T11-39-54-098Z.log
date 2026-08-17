@@ -1,0 +1,23 @@
+[    1107ms] [WARNING] Failed to decode downloaded font: http://127.0.0.1:4173/workspace/sites/sentinel-global-website/.vinext/fonts/geist-8ac0455e797f/geist-ff2310f5.woff2 @ http://127.0.0.1:4173/:0
+[    1107ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008813135 @ http://127.0.0.1:4173/:0
+[    1107ms] [WARNING] Failed to decode downloaded font: http://127.0.0.1:4173/workspace/sites/sentinel-global-website/.vinext/fonts/geist-8ac0455e797f/geist-875ccdd4.woff2 @ http://127.0.0.1:4173/:0
+[    1107ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008813135 @ http://127.0.0.1:4173/:0
+[    1107ms] [WARNING] Failed to decode downloaded font: http://127.0.0.1:4173/workspace/sites/sentinel-global-website/.vinext/fonts/geist-8ac0455e797f/geist-52306abf.woff2 @ http://127.0.0.1:4173/:0
+[    1108ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008813135 @ http://127.0.0.1:4173/:0
+[    1108ms] [WARNING] Failed to decode downloaded font: http://127.0.0.1:4173/workspace/sites/sentinel-global-website/.vinext/fonts/geist-8ac0455e797f/geist-001175b1.woff2 @ http://127.0.0.1:4173/:0
+[    1108ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008813135 @ http://127.0.0.1:4173/:0
+[    1108ms] [WARNING] Failed to decode downloaded font: http://127.0.0.1:4173/workspace/sites/sentinel-global-website/.vinext/fonts/geist-8ac0455e797f/geist-98bbbccb.woff2 @ http://127.0.0.1:4173/:0
+[    1108ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008813135 @ http://127.0.0.1:4173/:0
+[    1108ms] [WARNING] Failed to decode downloaded font: http://127.0.0.1:4173/workspace/sites/sentinel-global-website/.vinext/fonts/geist-mono-00e989178794/geist-mono-f6b33328.woff2 @ http://127.0.0.1:4173/:0
+[    1108ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008813135 @ http://127.0.0.1:4173/:0
+[    1562ms] [WARNING] Failed to decode downloaded font: http://127.0.0.1:4173/workspace/sites/sentinel-global-website/.vinext/fonts/geist-mono-00e989178794/geist-mono-44e03052.woff2 @ http://127.0.0.1:4173/:0
+[    1563ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008813135 @ http://127.0.0.1:4173/:0
+[    1564ms] [WARNING] Failed to decode downloaded font: http://127.0.0.1:4173/workspace/sites/sentinel-global-website/.vinext/fonts/geist-mono-00e989178794/geist-mono-0638449e.woff2 @ http://127.0.0.1:4173/:0
+[    1564ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008813135 @ http://127.0.0.1:4173/:0
+[    1569ms] [WARNING] Failed to decode downloaded font: http://127.0.0.1:4173/workspace/sites/sentinel-global-website/.vinext/fonts/geist-mono-00e989178794/geist-mono-44745446.woff2 @ http://127.0.0.1:4173/:0
+[    1570ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008813135 @ http://127.0.0.1:4173/:0
+[    1637ms] [WARNING] Failed to decode downloaded font: http://127.0.0.1:4173/workspace/sites/sentinel-global-website/.vinext/fonts/geist-mono-00e989178794/geist-mono-971fb274.woff2 @ http://127.0.0.1:4173/:0
+[    1637ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008813135 @ http://127.0.0.1:4173/:0
+[    1637ms] [WARNING] Failed to decode downloaded font: http://127.0.0.1:4173/workspace/sites/sentinel-global-website/.vinext/fonts/geist-mono-00e989178794/geist-mono-013b2f2f.woff2 @ http://127.0.0.1:4173/:0
+[    1637ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008813135 @ http://127.0.0.1:4173/:0
+[    3113ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://127.0.0.1:4173/node_modules/.vite/deps/react-dom_client.js?v=e9a39554:14337
